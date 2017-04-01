@@ -47,5 +47,23 @@ INSTALLING ON POSIX COMPATIBLE SYSTEMS
 
 * If you want emoji support go to https://github.com/github/gemoji/tree/master/images/emoji/unicode
   and copy the images into etherpad/src/static/img/emoji/unicode/
+  
+INSTRUCTIONS ON HOW TO SETUP SOCIAL LOGINS
+
+* FACEBOOK
+    * Create an app at https://developers.facebook.com/
+    * At the app Products menu, click "Add Product"
+        * Select "Facebook Login"
+        * Choose platform: Web
+        * Add your Site URL
+        * Click 'Next' to the rest of the steps (up to step 5)
+    * Click on App->Settings and grab the:
+        * Application ID
+        * App secret
+    * Add the values from the previous step to your settings file (etherpad/etc/etherpad.local.properties)
+        * facebookClientId
+        * facebookClientSecret
+    * Restart hackpad with bin/run.sh
+    * Facebook login should be functioning properly now
 
 
