@@ -98,8 +98,8 @@ function postToFeed(uid, accessToken, args) {
   return _graphApi((uid || "me") + "/feed", accessToken, args, true);
 }
 
-function getUserInfo(uid, accessToken) {
-  return _graphApi((uid || "me"), accessToken);
+function getUserInfo(uid, accessToken, scope) {
+  return _graphApi((uid || "me"), accessToken, scope);
 }
 
 // http://stackoverflow.com/questions/2785093/facebook-friends-getappusers-using-graph-api

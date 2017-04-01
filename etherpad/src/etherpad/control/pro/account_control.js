@@ -834,13 +834,12 @@ function _exchangeFacebookExchangeTokenForAccessToken(exchangeToken) {
       grant_type:"fb_exchange_token",
       fb_exchange_token:exchangeToken};
   var exchangeResult = urlGet("https://graph.facebook.com/oauth/access_token", args);
+
   var exchangeResultValues = {};
-  exchangeResult.content.split("&").map(function(kv) {
-    var keyValue = kv.split("=");
-    exchangeResultValues[keyValue[0]] = keyValue[1];
-  });
+  exchangeResultValues =  fastJSON.parse(exchangeResult.content);
+
   var accessToken = exchangeResultValues['access_token'];
-  var expirationSeconds =  exchangeResultValues['expires'];
+  var expirationSeconds =  exchangeResultValues['expires_in'];
   var expirationDate = new Date(+(new Date()) + (expirationSeconds * 1000));
 
   return {accessToken: accessToken, expirationDate: expirationDate};
@@ -862,7 +861,9 @@ function render_connect_fb_session_post() {
   }
 
   var existingSignedInAccount = getSessionProAccount();
-  var me = pro_facebook.getUserInfo(null, accessToken);
+  var scope = [];
+  scope['fields'] = 'id,name,email';
+  var me = pro_facebook.getUserInfo(null, accessToken, scope);
 
   if (me.length === 0) {
     log.logException("Facebook gave us a bad access token: " +accessToken);
