@@ -64,6 +64,27 @@ INSTRUCTIONS ON HOW TO SETUP SOCIAL LOGINS
         * facebookClientId
         * facebookClientSecret
     * Restart hackpad with bin/run.sh
-    * Facebook login should be functioning properly now
-
-
+    * Facebook login should be functional now
+    
+* GOOGLE
+    * Go to the Google API console: https://console.developers.google.com
+    * Click "Create credentials" and choose:
+        * OAuth client ID
+    * At the next screen select:
+        * Application type: "Web Application"
+        * Name: Something to your liking
+        * Restrictions: 
+            * Authorized JavaScript origins: No need to add anything
+            * Authorized redirect URIs: Add your redirect URL as such: http://<YOUR_DOMAIN_NAME>/ep/account/openid
+                * For example if you are trying hackpad locally with the default settings the authorized redirect would be: http://localhost:9000/ep/account/openid
+    * Click at "Dashboard" and then at "ENABLE API" 
+    * At the resulting screen select "Google+ API"
+    * At the next screen click "ENABLE"
+    * Now click again at "Credentials" and click on the Name you gave and copy your credentials: 
+            * Client ID
+            * Client secret
+    * Back at our configuration file paste the credentials you copied to the corresponding fields (etherpad/etc/etherpad.local.properties)
+        * googleClientId
+        * googleClientSecret
+    * Restart hackpad with bin/run.sh
+    * Google login should be functional now
