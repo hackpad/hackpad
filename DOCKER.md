@@ -19,6 +19,24 @@ Getting it running
 	Replace /path/to/this/repo below with the path to the current repository. Leave the other path alone. 
 
 		docker run -d -p 9000:9000 -v /path/to/this/repo:/etc/hackpad/src hackpad
+		
+	The available environment variables are:
+	
+        ADMIN_EMAILS - comma-separated superuser emails (default: admin@example.com)
+        DB_HOST - mysql host (default: mysql)
+        DB_PORT - mysql port (default: 3306)
+        DB_NAME - mysql database name (default: hackpad)
+        DB_USERNAME - mysql user (default: hackpad)
+        DB_PASSWORD - mysql user password (default: password)
+        TOP_DOMAINS - comma-separated top level domains (default: localhost,localbox.info)
+        USE_HTTPS_URLS - should hackpad emit the absolute urls using https as opposed to http (default: false)
+        $ACCOUNT_ENCRYPTION_KEY - This encryption key will be set both as the accountIdEncryptionKey and the defaultIdEncryptionKey
+        $GOOGLE_SECRET - Google OAuth secret key
+        $GOOGLE_ID - Google OAuth app id
+        $FB_ID - Facebook OAuth id
+        FB_SECRET - Facebook OAuth secret key
+        
+        Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker run' command, e.x. "-e DB_HOST=localhost -e DB_PORT=3306" etc. 
 
 	This will build hackpad, run schema migrations, and then start the server. It may take a few minutes. If you want to see what's going on, do:
 
