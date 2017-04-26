@@ -28,8 +28,8 @@ sed -i.bak s/__dbc_dbuser__/$DB_USERNAME/g hackpad/etherpad/etc/etherpad.local.p
 sed -i.bak s/__dbc_dbpass__/$DB_PASSWORD/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__account_id_encryption_key__/$ACCOUNT_ENCRYPTION_KEY/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__default_id_encryption_key__/$ACCOUNT_ENCRYPTION_KEY/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__fb_id__/$FB_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__fb_secret__/$FB_ID/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__fb_id__/$FB_ID/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__fb_secret__/$FB_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_client_secret__/$GOOGLE_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_client_id__/$GOOGLE_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(topdomains = \).*$/\1$TOP_DOMAINS/g" hackpad/etherpad/etc/etherpad.local.properties
