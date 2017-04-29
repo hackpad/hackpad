@@ -17,6 +17,7 @@ FB_SECRET=${FB_SECRET:-no_facebookClientSecret}
 FB_ID=${FB_ID:-no_facebookClientId}
 GOOGLE_SECRET=${GOOGLE_SECRET:-no_googleClientSecret}
 GOOGLE_ID=${GOOGLE_ID:-no_googleClientId}
+CUSTOM_EMAIL_ADDRESS=${CUSTOM_EMAIL_ADDRESS:-__custom_email_address__}
 SMTP_SERVER=${SMTP_SERVER:-__smtp_server__}
 SMTP_USER=${SMTP_USER:-__smtp_user__}
 SMTP_PASS=${SMTP_PASS:-__smtp_password__}
@@ -35,6 +36,7 @@ sed -i.bak s/__fb_id__/$FB_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__fb_secret__/$FB_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_client_secret__/$GOOGLE_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_client_id__/$GOOGLE_ID/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__custom_email_address__/$CUSTOM_EMAIL_ADDRESS/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_server__/$SMTP_SERVER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_user__/$SMTP_USER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_password__/$SMTP_PASS/g hackpad/etherpad/etc/etherpad.local.properties
