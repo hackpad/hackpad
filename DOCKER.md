@@ -30,11 +30,14 @@ Getting it running
         DB_PASSWORD - mysql user password (default: password)
         TOP_DOMAINS - comma-separated top level domains (default: localhost,localbox.info)
         USE_HTTPS_URLS - should hackpad emit the absolute urls using https as opposed to http (default: false)
-        $ACCOUNT_ENCRYPTION_KEY - This encryption key will be set both as the accountIdEncryptionKey and the defaultIdEncryptionKey
-        $GOOGLE_SECRET - Google OAuth secret key
-        $GOOGLE_ID - Google OAuth app id
-        $FB_ID - Facebook OAuth id
+        ACCOUNT_ENCRYPTION_KEY - This encryption key will be set both as the accountIdEncryptionKey and the defaultIdEncryptionKey
+        GOOGLE_SECRET - Google OAuth secret key
+        GOOGLE_ID - Google OAuth app id
+        FB_ID - Facebook OAuth id
         FB_SECRET - Facebook OAuth secret key
+        SMTP_SERVER - The smtp server host (needs the PORT as well), ex. smtp.my.host:587
+        SMTP_USER - SMTP username
+        SMTP_PASS - SMTP password
         
         Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker run' command, e.x. "-e DB_HOST=localhost -e DB_PORT=3306" etc. 
 
