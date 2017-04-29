@@ -17,9 +17,9 @@ FB_SECRET=${FB_SECRET:-no_facebookClientSecret}
 FB_ID=${FB_ID:-no_facebookClientId}
 GOOGLE_SECRET=${GOOGLE_SECRET:-no_googleClientSecret}
 GOOGLE_ID=${GOOGLE_ID:-no_googleClientId}
-SMTP_SERVER=${SMTP_SERVER:__smtp_server__}
-SMTP_USER=${SMTP_USER:__smtp_user__}
-SMTP_PASS=${SMTP_PASS:__smtp_password__}
+SMTP_SERVER=${SMTP_SERVER:-__smtp_server__}
+SMTP_USER=${SMTP_USER:-__smtp_user__}
+SMTP_PASS=${SMTP_PASS:-__smtp_password__}
 
 cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/etherpad.local.properties
 
