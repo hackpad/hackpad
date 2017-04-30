@@ -14,6 +14,7 @@ DB_PORT=$(escapeChars ${DB_PORT:-3306})
 DB_NAME=$(escapeChars ${DB_NAME:-hackpad})
 DB_USERNAME=$(escapeChars ${DB_USERNAME:-hackpad})
 DB_PASSWORD=$(escapeChars ${DB_PASSWORD:-password})
+CANONICAL_DOMAIN=$(escapeChars ${CANONICAL_DOMAIN:-localhost})
 TOP_DOMAINS=$(escapeChars ${TOP_DOMAINS:-localhost,localbox.info})
 USE_HTTPS_URLS=$(escapeChars ${USE_HTTPS_URLS:-false})
 ACCOUNT_ENCRYPTION_KEY=$(escapeChars ${ACCOUNT_ENCRYPTION_KEY:-0123456789abcdef})
@@ -44,6 +45,7 @@ sed -i.bak s/__custom_email_address__/$CUSTOM_EMAIL_ADDRESS/g hackpad/etherpad/e
 sed -i.bak s/__smtp_server__/$SMTP_SERVER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_user__/$SMTP_USER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_password__/$SMTP_PASS/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__canonical_domain__/$CANONICAL_DOMAIN/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(topdomains = \).*$/\1$TOP_DOMAINS/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(useHttpsUrls = \).*$/\1$USE_HTTPS_URLS/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(devMode = \).*$/\1 true/g" hackpad/etherpad/etc/etherpad.local.properties
