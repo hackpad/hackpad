@@ -4,23 +4,27 @@ set -e
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-ADMIN_EMAILS=${ADMIN_EMAILS:-admin@example.com}
-DB_HOST=${DB_HOST:-mysql}
-DB_PORT=${DB_PORT:-3306}
-DB_NAME=${DB_NAME:-hackpad}
-DB_USERNAME=${DB_USERNAME:-hackpad}
-DB_PASSWORD=${DB_PASSWORD:-password}
-TOP_DOMAINS=${TOP_DOMAINS:-localhost,localbox.info}
-USE_HTTPS_URLS=${USE_HTTPS_URLS:-false}
-ACCOUNT_ENCRYPTION_KEY=${ACCOUNT_ENCRYPTION_KEY:-0123456789abcdef}
-FB_SECRET=${FB_SECRET:-no_facebookClientSecret}
-FB_ID=${FB_ID:-no_facebookClientId}
-GOOGLE_SECRET=${GOOGLE_SECRET:-no_googleClientSecret}
-GOOGLE_ID=${GOOGLE_ID:-no_googleClientId}
-CUSTOM_EMAIL_ADDRESS=${CUSTOM_EMAIL_ADDRESS:-__custom_email_address__}
-SMTP_SERVER=${SMTP_SERVER:-__smtp_server__}
-SMTP_USER=${SMTP_USER:-__smtp_user__}
-SMTP_PASS=${SMTP_PASS:-__smtp_password__}
+function escapeChars(){
+    printf '%q\n' "$1" | sed 's/\//\\\//g'
+}
+
+ADMIN_EMAILS=$(escapeChars ${ADMIN_EMAILS:-admin@example.com})
+DB_HOST=$(escapeChars ${DB_HOST:-mysql})
+DB_PORT=$(escapeChars ${DB_PORT:-3306})
+DB_NAME=$(escapeChars ${DB_NAME:-hackpad})
+DB_USERNAME=$(escapeChars ${DB_USERNAME:-hackpad})
+DB_PASSWORD=$(escapeChars ${DB_PASSWORD:-password})
+TOP_DOMAINS=$(escapeChars ${TOP_DOMAINS:-localhost,localbox.info})
+USE_HTTPS_URLS=$(escapeChars ${USE_HTTPS_URLS:-false})
+ACCOUNT_ENCRYPTION_KEY=$(escapeChars ${ACCOUNT_ENCRYPTION_KEY:-0123456789abcdef})
+FB_SECRET=$(escapeChars ${FB_SECRET:-no_facebookClientSecret})
+FB_ID=$(escapeChars ${FB_ID:-no_facebookClientId})
+GOOGLE_SECRET=$(escapeChars ${GOOGLE_SECRET:-no_googleClientSecret})
+GOOGLE_ID=$(escapeChars ${GOOGLE_ID:-no_googleClientId})
+CUSTOM_EMAIL_ADDRESS=$(escapeChars ${CUSTOM_EMAIL_ADDRESS:-__custom_email_address__})
+SMTP_SERVER=$(escapeChars ${SMTP_SERVER:-__smtp_server__})
+SMTP_USER=$(escapeChars ${SMTP_USER:-__smtp_user__})
+SMTP_PASS=$(escapeChars ${SMTP_PASS:-__smtp_password__})
 
 cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/etherpad.local.properties
 
