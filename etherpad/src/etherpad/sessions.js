@@ -229,6 +229,8 @@ function preRequestCookieCheck() {
       response.stop();
     }
 
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
     // subdomain without cookies
     if (request.params.cookieShouldBeSet) {
       if (request.path.indexOf("/ep/api/embed-pad") == 0 ) {
@@ -236,7 +238,7 @@ function preRequestCookieCheck() {
         var p = request.host.split(':')[1];
         p = (p ? (":"+p) : "");
 
-        var contURL = request.scheme+"://"+pro_utils.getRequestSuperdomain()+p+"/?setCookie=1";
+        var contURL = theScheme+"://"+pro_utils.getRequestSuperdomain()+p+"/?setCookie=1";
         log.warn("Embed cookie failure!");
         helpers.hideHeader();
 
@@ -261,7 +263,7 @@ function preRequestCookieCheck() {
       var contUrl = request.url;
       var p = request.host.split(':')[1];
       p = (p ? (":"+p) : "");
-      response.redirect(request.scheme+"://"+pro_utils.getRequestSuperdomain()+p+
+      response.redirect(theScheme+"://"+pro_utils.getRequestSuperdomain()+p+
                         "/?setCookie=1&contUrl="+encodeURIComponent(contUrl));
     }
   }

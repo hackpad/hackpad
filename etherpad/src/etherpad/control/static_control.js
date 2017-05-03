@@ -121,8 +121,10 @@ function serveSitemapXml(subDomain) {
     var d = lastmod.getDate();
     var m = lastmod.getMonth()+1;
     var y = lastmod.getFullYear();
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
     return {
-      url: request.scheme + '://' + (subDomain ? subDomain + "." : "") + request.host + path,
+      url: theScheme + '://' + (subDomain ? subDomain + "." : "") + request.host + path,
       lastmod: y +'-'+ (m<=9?'0'+m:m) +'-'+ (d<=9?'0'+d:d)
     };
   }
@@ -170,8 +172,9 @@ function serveSitemapIndexXml() {
   // list all public domains
   var sitemaps = domains.listPublicDomains().map(function(domainId) {
     var subDomain = domains.getDomainRecord(domainId).subDomain;
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
     return {
-      url: request.scheme + '://' + request.host + "/sitemap-" + subDomain + ".xml",
+      url: theScheme + '://' + request.host + "/sitemap-" + subDomain + ".xml",
       lastmod: y +'-'+ (m<=9?'0'+m:m) +'-'+ (d<=9?'0'+d:d)
     };
   });

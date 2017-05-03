@@ -314,7 +314,9 @@ function checkRequestIsWellFormed() {
 //----------------------------------------------------------------
 function checkHost() {
   function _redirectRequestToDomain (domain) {
-    var newurl = request.scheme + "://" + domain + request.path;
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
+    var newurl = theScheme + "://" + domain + request.path;
     if (request.query) { newurl += "?"+request.query; }
     response.redirect(newurl);
   }

@@ -109,9 +109,11 @@ function _parseAuthorization() {
   Veryify the provided OAuth 1.0a signature.
  */
 function clientIdFromSignature() {
-  var message = {
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
+    var message = {
     method: request.method,
-    action: request.scheme + "://" + request.host + request.path,
+    action: theScheme + "://" + request.host + request.path,
     parameters: {},
   };
   if (request.headers['Authorization']) {

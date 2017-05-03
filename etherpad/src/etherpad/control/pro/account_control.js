@@ -190,9 +190,10 @@ function render_as_post() {
   if (!(otherSession && otherSession.proAccount && otherSession.proAccount.id == asAccount.id)) {
     // Doesn't look like they're actually signed in there
     pro_accounts.updateCookieSignedInAcctsOnSignOut(asAccount.id);
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
 
     var here = request.url;
-    redirectUrl = (request.scheme + "://" + domains.fqdnForDomainId(asAccount.domainId) + "/ep/account/sign-in?cont=" +
+    redirectUrl = (theScheme + "://" + domains.fqdnForDomainId(asAccount.domainId) + "/ep/account/sign-in?cont=" +
       encodeURIComponent(here));
 
     var redirects = request.params.cont ? ((request.params.cont.match(/cont/g)||[]).length) : 0;
@@ -710,8 +711,10 @@ function render_sign_out_get() {
 
   var origin = request.params.origin || domains.getRequestDomainRecord().subDomain;
   var redirectUrl;
+  var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
   if (nextAcctToSignOut && nextAcctToSignOut.domainId != domains.getRequestDomainId()) {
-    redirectUrl = request.scheme + "://" + domains.fqdnForDomainId(nextAcctToSignOut.domainId) + "/ep/account/sign-out?origin=" + origin;
+      redirectUrl = theScheme + "://" + domains.fqdnForDomainId(nextAcctToSignOut.domainId) + "/ep/account/sign-out?origin=" + origin;
   } else {
     // The cookie was out of sync with reality
     // TODO (remove this check i don't think it's needed anymore)
@@ -721,7 +724,7 @@ function render_sign_out_get() {
     // We're done signing out!
     pro_accounts.setCookieSignedInAccts([]);
     var originId = domains.getDomainRecordFromSubdomain(origin).id;
-    redirectUrl = request.scheme + "://" + domains.fqdnForDomainId(originId) + "/";
+    redirectUrl = theScheme + "://" + domains.fqdnForDomainId(originId) + "/";
   }
   response.redirect(redirectUrl);
 }

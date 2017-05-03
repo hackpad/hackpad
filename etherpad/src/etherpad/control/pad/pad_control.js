@@ -1057,9 +1057,11 @@ function render_hackpadinvite_post() {
     }
   }, 'r');
 
-  var toAddress = existingAccount.email;
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
+    var toAddress = existingAccount.email;
   pro_invite.inviteUserToPadByEmail(padutils.getGlobalPadId(padId), toAddress,
-          request.scheme, request.host, getSessionProAccount());
+      theScheme, request.host, getSessionProAccount());
 }
 
 //----------------------------------------------------------------
@@ -1072,11 +1074,13 @@ function render_emailinvite_post() {
   var toAddresses = toAddress.split(",");
   var hostAccount = getSessionProAccount();
   var userId;
-  for (var i=0; i<toAddresses.length; i++) {
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
+    for (var i=0; i<toAddresses.length; i++) {
     // max 100 emails per day
     enforceDailyLimit("emailDailyInvites", "acct-" + hostAccount.id, 100);
     userId = pro_invite.inviteUserToPadByEmail(padutils.getGlobalPadId(padId), toAddresses[i],
-          request.scheme, request.host, hostAccount);
+        theScheme, request.host, hostAccount);
   }
 
   // return link to last user invited;

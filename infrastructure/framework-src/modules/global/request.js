@@ -271,7 +271,9 @@ signedCookie : function(name) {
  */
 get url() {
   if (this.isDefined) {
-    return this.scheme+"://"+this.host+this.path+(this.query ? "?"+this.query : "");
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
+    return theScheme+"://"+this.host+this.path+(this.query ? "?"+this.query : "");
   } else {
     log.logException("Accessing request.url outside of request context.");
   }

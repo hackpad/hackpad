@@ -161,9 +161,11 @@ function render_migrate_to_both(encryptedGroupId, domainId) {
     return true;
   }
 
+  var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
   var newGroupURL =
-    request.scheme + "://" + host +
-    "/ep/group/" + pro_groups.getEncryptedGroupId(newGroupId);
+      theScheme + "://" + host +
+        "/ep/group/" + pro_groups.getEncryptedGroupId(newGroupId);
 
   utils.renderJSON({success:true, url:newGroupURL});
   return true;
@@ -524,7 +526,8 @@ function render_add_post() {
 
     // send invite email
     if (sendInviteEmail) {
-      var editlink = request.scheme+'://'+request.host+ "/ep/group/" + encryptedGroupId + "?token=" + inviteToken;
+        var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+        var editlink = theScheme+'://'+request.host+ "/ep/group/" + encryptedGroupId + "?token=" + inviteToken;
 
       var groupName = pro_groups.getGroupName(groupId);
 
@@ -667,8 +670,10 @@ function render_grant_access_get() { // isValidSignedRequest
     var inviteToken = stringutils.randomString(20);
     pro_groups.addMember(groupId, userId, getSessionProAccount().id, null /* fb post id */, inviteToken);
 
-    // send invite email
-    var editlink = request.scheme+'://'+request.host+ "/ep/group/" + encryptedGroupId + "?token=" + inviteToken;
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
+   // send invite email
+    var editlink = theScheme+'://'+request.host+ "/ep/group/" + encryptedGroupId + "?token=" + inviteToken;
 
     var groupName = pro_groups.getGroupName(groupId);
 
@@ -682,7 +687,7 @@ function render_grant_access_get() { // isValidSignedRequest
       log.logException(ex);
     }
 
-    var groupLink = request.scheme+'://'+request.host+ "/ep/group/" + encryptedGroupId;
+    var groupLink = theScheme+'://'+request.host+ "/ep/group/" + encryptedGroupId;
 
     utils.renderHtml('pro/account/access_granted.ejs', {
       fullName: requestingUser.fullName,
@@ -815,7 +820,9 @@ function render_feed_get() {
   response.setContentType("application/atom+xml; charset=utf-8");
   var entries = [];
 
-  listOfPads.forEach(function(padInfo) {
+  var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
+    listOfPads.forEach(function(padInfo) {
     if (!padInfo) { return; }
 
     var desc = '';
@@ -840,7 +847,7 @@ function render_feed_get() {
       author: editors.join(", "), // author names?
       published: padInfo.createdDate, // fixme: date added to collection
       updated: padInfo.lastEditedDate || padInfo.createdDate,
-      href: request.scheme+"://"+request.host+"/"+encodeURIComponent(padInfo.localPadId),
+      href: theScheme+"://"+request.host+"/"+encodeURIComponent(padInfo.localPadId),
       content: desc
     });
     if (padInfo.createdDate && padInfo.createdDate > lastModified) {
@@ -855,7 +862,8 @@ function render_feed_get() {
 
   response.write(atomfeed.renderFeed(
     pro_groups.getGroupName(groupId), lastModified, entries,
-    request.scheme+"://"+request.host+"/ep/group/" + encryptedGroupId));
+        theScheme+"://"+request.host+"/ep/group/" + encryptedGroupId)
+  );
 
   return true;
 }

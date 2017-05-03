@@ -185,10 +185,12 @@ function notifyNewUserOfWelcomePad(emailAddress, padId) {
 
   var trackingId = email_tracking.trackEmailSent(emailAddress, email_tracking.DOMAIN_WELCOME);
   var editlink = absolutePadURL(padId, {eid: trackingId});
-  pro_invite.sendPadInviteEmail(emailAddress, pro_utils.getFullProDomain(), request.host, request.scheme, invitedBy, padId, "Welcome to " + invitedTo + "!", undefined/*revId*/, editlink);
+  var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+  pro_invite.sendPadInviteEmail(emailAddress, pro_utils.getFullProDomain(), request.host, theScheme, invitedBy, padId, "Welcome to " + invitedTo + "!", undefined/*revId*/, editlink);
 }
 
 function notifyUserOfUpdatePad(emailAddress, padId, htmlContent) {
-  pro_invite.sendPadInviteEmail(emailAddress, pro_utils.getFullProDomain(), request.host, request.scheme, "The Hackpad Team", padId,  "Hello from Hackpad!",
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+    pro_invite.sendPadInviteEmail(emailAddress, pro_utils.getFullProDomain(), request.host, theScheme, "The Hackpad Team", padId,  "Hello from Hackpad!",
       undefined /*revId*/, undefined /*editLink*/, htmlContent, "text/html; charset=utf-8");
 }

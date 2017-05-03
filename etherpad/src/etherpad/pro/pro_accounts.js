@@ -1386,9 +1386,11 @@ function getSessionSpaces() {
   var recentDomains = domainInfos;
   jsutils.reverseSortBy(recentDomains, 'lastLoginDate');
 
+  var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
   domainInfos = fixedDomains.concat(recentDomains);
   domainInfos.forEach(function(s) {
-    s.url = request.scheme + "://" + (s.subDomain && s.id != 1 ? s.subDomain + "." : "") + appjet.config['etherpad.canonicalDomain'] + '/',
+    s.url = theScheme + "://" + (s.subDomain && s.id != 1 ? s.subDomain + "." : "") + appjet.config['etherpad.canonicalDomain'] + '/',
     s.orgName = s.id != 1 ? s.orgName : "hackpad";
   });
 

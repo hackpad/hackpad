@@ -107,7 +107,9 @@ response.redirect = function(path) {
   }
   if (path.indexOf('/') == 0) {
     // make sure absolute URL has proper host/port
-    path = request.scheme+"://"+request.host+path;
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+
+    path = theScheme+"://"+request.host+path;
   }
   _cx().response().redirect(path);
 };

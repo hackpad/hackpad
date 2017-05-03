@@ -431,7 +431,8 @@ function decorateWithPinnedPads(groups) {
 
 function groupURL(groupId) {
   var encryptedGroupId = getEncryptedGroupId(groupId);
-  return request.scheme+'://'+request.host+'/ep/group/'+encryptedGroupId;
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+    return theScheme+'://'+request.host+'/ep/group/'+encryptedGroupId;
 }
 
 function _notifyCollectionFollowersOfNewPad(collectionId, localPadId, ids, name) {

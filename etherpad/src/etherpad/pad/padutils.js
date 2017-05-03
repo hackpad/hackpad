@@ -157,7 +157,8 @@ function urlForGlobalPadId(globalPadId, optTitle) {
 }
 
 function urlForLocalPadId(localPadId, title) {
-  return request.scheme+'://'+request.host+'/'+localPadId + "#" + title.replace(/ /g, '-');
+    var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+    return theScheme+'://'+request.host+'/'+localPadId + "#" + title.replace(/ /g, '-');
 }
 
 function localPadIdFromURL(url) {
