@@ -30,7 +30,9 @@ Getting it running
         DB_PASSWORD - mysql user password (default: password)
         TOP_DOMAINS - comma-separated top level domains (default: localhost,localbox.info)
         USE_HTTPS_URLS - should hackpad emit the absolute urls using https as opposed to http (default: false)
-        ACCOUNT_ENCRYPTION_KEY - This encryption key will be set both as the accountIdEncryptionKey and the defaultIdEncryptionKey
+        DEFAULT_ENCRYPTION_KEY - Set the default encryption key (defaultIdEncryptionKey setting)
+        ACCOUNT_ENCRYPTION_KEY - Set an encryption key for accounts (accountIdEncryptionKey setting)
+        COLLECTION_ENCRYPTION_KEY - Set an encryption key for collections (collectionIdEncryptionKey setting)
         GOOGLE_SECRET - Google OAuth secret key
         GOOGLE_ID - Google OAuth app id
         FB_ID - Facebook OAuth id

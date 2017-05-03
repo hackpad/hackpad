@@ -18,6 +18,8 @@ CANONICAL_DOMAIN=$(escapeChars ${CANONICAL_DOMAIN:-localhost})
 TOP_DOMAINS=$(escapeChars ${TOP_DOMAINS:-localhost,localbox.info})
 USE_HTTPS_URLS=$(escapeChars ${USE_HTTPS_URLS:-false})
 ACCOUNT_ENCRYPTION_KEY=$(escapeChars ${ACCOUNT_ENCRYPTION_KEY:-0123456789abcdef})
+DEFAULT_ENCRYPTION_KEY=$(escapeChars ${DEFAULT_ENCRYPTION_KEY:-0123456789abcdef})
+COLLECTION_ENCRYPTION_KEY=$(escapeChars ${COLLECTION_ENCRYPTION_KEY:-0123456789abcdef})
 FB_SECRET=$(escapeChars ${FB_SECRET:-no_facebookClientSecret})
 FB_ID=$(escapeChars ${FB_ID:-no_facebookClientId})
 GOOGLE_SECRET=$(escapeChars ${GOOGLE_SECRET:-no_googleClientSecret})
@@ -36,7 +38,8 @@ sed -i.bak s/__dbc_dbname__/$DB_NAME/g hackpad/etherpad/etc/etherpad.local.prope
 sed -i.bak s/__dbc_dbuser__/$DB_USERNAME/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dbc_dbpass__/$DB_PASSWORD/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__account_id_encryption_key__/$ACCOUNT_ENCRYPTION_KEY/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__default_id_encryption_key__/$ACCOUNT_ENCRYPTION_KEY/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__default_id_encryption_key__/$DEFAULT_ENCRYPTION_KEY/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__collection_id_encryption_key__/$COLLECTION_ENCRYPTION_KEY/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__fb_id__/$FB_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__fb_secret__/$FB_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_client_secret__/$GOOGLE_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
