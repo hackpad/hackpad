@@ -24,8 +24,11 @@
   <% } %>
 
   <!-- Google sign-in button -->
-  <a href="<%=googleSignInUrl%>" class="google-signin-button" target="<%=typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self'%>"><img src="<%=helpers.cdn()%>/static/img/google-<%= type %>.png" style="border:0px;"></a>
+  <% if (helpers.allowGoogleSignin()) { %>
+    <a href="<%=googleSignInUrl%>" class="google-signin-button" target="<%=typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self'%>"><img src="<%=helpers.cdn()%>/static/img/google-<%= type %>.png" style="border:0px;"></a>
+  <% } %>
 <% return ejs_data; }); %>
+
 
 
 <% template.define('app-login-form', function() { var ejs_data=''; %>
@@ -96,10 +99,12 @@
     </div>
 
     <div id="nofacebook" class="page-login-rhs">
-      <a id="login-google" href="<%=googleSignInUrl%>" class="google-signin-button" target="<%= typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self' %>">
-        <img src="<%=helpers.cdn()%>/static/img/goog.png">
-        <span>Sign in with <strong>Google</strong></span>
-      </a>
+      <% if (helpers.allowGoogleSignin()) { %>
+        <a id="login-google" href="<%=googleSignInUrl%>" class="google-signin-button" target="<%= typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self' %>">
+          <img src="<%=helpers.cdn()%>/static/img/goog.png">
+          <span>Sign in with <strong>Google</strong></span>
+        </a>
+      <% } %>
 
       <% if (helpers.allowFacebookSignin()) { %>
         <a id="login-facebook" class="fb-login-required" href="<%=request.url%>">
@@ -108,7 +113,9 @@
         </a>
       <% } %>
 
-      <span id="login-or"><span class="page-login-or"></span><span class="page-login-or-lbl">or</span><span class="page-login-or"></span></span>
+      <% if (helpers.allowFacebookSignin() || helpers.allowGoogleSignin()) { %>
+        <span id="login-or"><span class="page-login-or"></span><span class="page-login-or-lbl">or</span><span class="page-login-or"></span></span>
+      <% } %>
 
       <form id="login-form" method="post" action="/ep/account/signin">
         <%- helpers.xsrfTokenElement() %>

@@ -34,6 +34,7 @@ function _getDefaultConfig() {
     siteName: _guessSiteName(),
     defaultPadText: "",
     allowFacebookSignin: false,
+    allowGoogleSignin: false,
     publicDomain: false,
     defaultGuestPolicy: "domain",
     allowMemberLinkAccess: false,

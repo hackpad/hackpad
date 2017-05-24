@@ -486,7 +486,19 @@ function addSmartAppBanner(url) {
 }
 
 function allowFacebookSignin() {
-  return domains.supportsFacebookSignin();
+  if (appjet.config.enableFacebookLogin == "false") {
+    return false;
+  } else {
+    return domains.supportsFacebookSignin();
+  }
+}
+
+function allowGoogleSignin() {
+  if (appjet.config.enableGoogleLogin == "false") {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 function supportEmailAddress() {
