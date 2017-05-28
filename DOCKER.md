@@ -33,14 +33,21 @@ Getting it running
         DEFAULT_ENCRYPTION_KEY - Set the default encryption key (defaultIdEncryptionKey setting)
         ACCOUNT_ENCRYPTION_KEY - Set an encryption key for accounts (accountIdEncryptionKey setting)
         COLLECTION_ENCRYPTION_KEY - Set an encryption key for collections (collectionIdEncryptionKey setting)
+        ENABLE_GOOGLE_LOGIN - Enable Google OAuth2 login (true by default)
         GOOGLE_SECRET - Google OAuth secret key
         GOOGLE_ID - Google OAuth app id
+        ENABLE_FB_LOGIN - Enable Facebook OAuth2 login (true by default)
         FB_ID - Facebook OAuth id
         FB_SECRET - Facebook OAuth secret key
         CUSTOM_EMAIL_ADDRESS - This needs to be a valid, resolvable, address, ex. noreply@mycompany.com
         SMTP_SERVER - The smtp server host (needs the PORT as well), ex. smtp.my.host:587
         SMTP_USER - SMTP username
         SMTP_PASS - SMTP password
+        CUSTOM_SERVICE_LOGIN - Enable Custom Service OAuth2 login (false is default)
+        CUSTOM_SERVICE_API_BASE - The Base API URL for the custom OAuth service
+        OAUTH_SERVICE_SECRET - Custom Service OAuth secret key
+        OAUTH_SERVICE_ID - Custom Service OAuth app id
+        
         
         Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker run' command, e.x. "-e DB_HOST=localhost -e DB_PORT=3306" etc. 
 

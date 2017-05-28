@@ -252,6 +252,10 @@ function maybeSignInBasedOnAccount(otherSession, autoJoin) {
     if (otherSession.isGoogleConnected) {
       pro_account_auto_signin.setGoogleAutoSigninCookie(true);
     }
+    getSession().isOauthServiceConnected = otherSession.isOauthServiceConnected;
+    if (otherSession.isOauthServiceConnected) {
+      pro_account_auto_signin.setOauthServiceAutoSigninCookie(true);
+    }
     getSession().dropboxTokenInfo = otherSession.dropboxTokenInfo;
     signInSession(matchingAcct);
 
@@ -862,6 +866,7 @@ function signOut() {
   delete getSession().proAccount;
   delete getSession().facebookInfo;
   delete getSession().isGoogleConnected;
+  delete getSession().isOauthServiceConnected;
   delete getSession().dropboxTokenInfo;
   sessions.saveSession();
 

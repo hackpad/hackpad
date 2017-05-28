@@ -113,7 +113,14 @@
         </a>
       <% } %>
 
-      <% if (helpers.allowFacebookSignin() || helpers.allowGoogleSignin()) { %>
+      <% if (helpers.allowCustomServiceSignin()) { %>
+        <a id="login-stek" href="<%=serviceSignInUrl%>" class="stek-login-required" target="<%= typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self' %>">
+          <img class="fb-connect-button" src="<%=helpers.cdn()%>/static/img/logo-stek.svg">
+          <!--<span>Sign in with <strong>Stek.io</strong></span>-->
+        </a>
+      <% } %>
+
+      <% if (helpers.allowFacebookSignin() || helpers.allowGoogleSignin() || helpers.allowCustomServiceSignin()) { %>
         <span id="login-or"><span class="page-login-or"></span><span class="page-login-or-lbl">or</span><span class="page-login-or"></span></span>
       <% } %>
 

@@ -27,6 +27,7 @@ import("etherpad.pro.domains");
 import("etherpad.pro.pro_accounts");
 import("etherpad.pro.pro_facebook");
 import("etherpad.pro.google_account");
+import("etherpad.pro.sso_account");
 import("etherpad.pro.pro_tokens");
 import("etherpad.pro.pro_accounts.getSessionProAccount");
 import("etherpad.pro.pro_utils");
@@ -167,6 +168,12 @@ function checkAutoSignin(cont, optSkipUnifiedAccounts) {
     response.redirect(google_account.googleOAuth2URLForLogin(account.email));
   }
 
+  if (shouldAttemptOauthServiceAutoSignin()) {
+    var account = pro_accounts.getAccountById(record.accountId);
+    setOauthServiceAutoSigninCookie(false); // prevent infinite loop if something's off
+    response.redirect(sso_account.serviceOAuth2URLForLogin(account.email));
+  }
+
   // login into facebook if needed
   else if (shouldAttemptFacebookAutoSignin()) {
     log.custom('accounts', 'Should try fb');
@@ -215,6 +222,10 @@ function shouldAttemptFacebookAutoSignin() {
   return (request.cookies[_cookieName("FASIE")] == "T");
 }
 
+function shouldAttemptOauthServiceAutoSignin() {
+  return (request.cookies[_cookieName("CASIE")] == "T");
+}
+
 function setFacebookAutoSigninCookie(rememberMe) {
   // set this insecure cookie just to indicate that account is google-auto-sign-in-able
   response.setCookie({
@@ -230,6 +241,17 @@ function setGoogleAutoSigninCookie(rememberMe) {
   // set this insecure cookie just to indicate that account is google-auto-sign-in-able
   response.setCookie({
     name: _cookieName("GASIE"),
+    value: (rememberMe ? "T" : "F"),
+    path: "/",
+    domain: request.domain,
+    expires: new Date(32503708800000), // year 3000
+  });
+}
+
+function setOauthServiceAutoSigninCookie(rememberMe) {
+  // set this insecure cookie just to indicate that account is google-auto-sign-in-able
+  response.setCookie({
+    name: _cookieName("CASIE"),
     value: (rememberMe ? "T" : "F"),
     path: "/",
     domain: request.domain,

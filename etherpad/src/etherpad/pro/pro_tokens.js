@@ -16,6 +16,7 @@ var FACEBOOK_OAUTH2_TOKEN = 3;
 var HACKPAD_API_TOKEN = 4;
 var IOS_DEVICE_TOKEN = 5;
 var GOOGLE_OAUTH2_TOKEN = 6;
+var CUSTOM_OAUTH2_SERVICE_TOKEN = 7;
 
 function removeFacebookTokenForProUserId(uid) {
   sqlobj.deleteRows('pro_tokens', {userId: uid, tokenType: FACEBOOK_OAUTH2_TOKEN});

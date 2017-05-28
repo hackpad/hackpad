@@ -501,6 +501,14 @@ function allowGoogleSignin() {
   }
 }
 
+function allowCustomServiceSignin() {
+  if (appjet.config.enableCustomServiceSignin == "false") {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function supportEmailAddress() {
   return appjet.config.supportEmailAddress;
 }

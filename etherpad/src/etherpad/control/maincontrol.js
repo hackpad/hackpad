@@ -29,6 +29,7 @@ import("etherpad.control.pro.pro_main_control");
 import("etherpad.pro.domains");
 import("etherpad.pro.pro_account_auto_signin");
 import("etherpad.pro.google_account");
+import("etherpad.pro.sso_account");
 import("etherpad.sessions");
 
 import("etherpad.pad.model");
@@ -92,6 +93,7 @@ function render_main_get() {
   renderHtml('main/home.ejs', {
     publicPads: publicPads,
     googleSignInUrl: google_account.googleOAuth2URLForLogin(),
+    serviceSignInUrl: sso_account.serviceOAuth2URLForLogin(),
     isSubDomain: !domains.isPrimaryDomainRequest(),
 
   });
