@@ -24,6 +24,7 @@ Getting it running
 	
         ADMIN_EMAILS - comma-separated superuser emails (default: admin@example.com)
         DB_HOST - mysql host (default: mysql)
+        DB_REQUIRE_SSL - Defaults to false
         DB_PORT - mysql port (default: 3306)
         DB_NAME - mysql database name (default: hackpad)
         DB_USERNAME - mysql user (default: hackpad)

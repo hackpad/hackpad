@@ -10,6 +10,7 @@ function escapeChars(){
 
 ADMIN_EMAILS=$(escapeChars ${ADMIN_EMAILS:-admin@example.com})
 DB_HOST=$(escapeChars ${DB_HOST:-mysql})
+DB_REQUIRE_SSL=$(escapeChars ${DB_REQUIRE_SSL:-false})
 DB_PORT=$(escapeChars ${DB_PORT:-3306})
 DB_NAME=$(escapeChars ${DB_NAME:-hackpad})
 DB_USERNAME=$(escapeChars ${DB_USERNAME:-hackpad})
@@ -38,6 +39,7 @@ cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/ethe
 
 sed -i.bak s/__email_addresses_with_admin_access__/$ADMIN_EMAILS/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dbc_dbserver__/$DB_HOST/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__dbc_require_ssl__/$DB_REQUIRE_SSL/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dbc_dbport__/$DB_PORT/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dbc_dbname__/$DB_NAME/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dbc_dbuser__/$DB_USERNAME/g hackpad/etherpad/etc/etherpad.local.properties
