@@ -31,9 +31,6 @@ var DEFAULT_SCOPES = [
 ];
 
 var CLIENT_DETAILS;
-var CUSTOM_SERVICE_API_BASE = 'http://hackpad-sso.stek.io';
-
-
 
 //----------------------------------------------------------------
 // callbacks (Sends the user here if they approve linkage)
@@ -97,7 +94,7 @@ function handleLoginCallback() {
 function currentUserInfo(optOverrideToken) {
   var token = optOverrideToken || pro_tokens.getFreshToken(pro_tokens.CUSTOM_OAUTH2_SERVICE_TOKEN).token;
 
-  return JSON.parse(netutils.urlGet(CUSTOM_SERVICE_API_BASE + "/oauth2/userinfo/", {}/*params*/, {
+  return JSON.parse(netutils.urlGet(appjet.config.customClientOAuthEndpoint + "/oauth2/userinfo/", {}/*params*/, {
     'Authorization': "Bearer " + token,
   }).content);
 }
@@ -211,8 +208,8 @@ function clientSecret() {
 
 function clientServiceDetails() {
   return {
-    token_uri: CUSTOM_SERVICE_API_BASE + "/oauth2/token/",
-    auth_uri: CUSTOM_SERVICE_API_BASE + "/oauth2/authorize/",
+    token_uri: appjet.config.customClientOAuthEndpoint + "/oauth2/token/",
+    auth_uri: appjet.config.customClientOAuthEndpoint + "/oauth2/authorize/",
     client_secret: appjet.config.serviceClientSecret,
     client_id: appjet.config.serviceClientId
   };
