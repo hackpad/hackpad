@@ -31,10 +31,10 @@ SMTP_USER=$(escapeChars ${SMTP_USER:-__smtp_user__})
 SMTP_PASS=$(escapeChars ${SMTP_PASS:-__smtp_password__})
 ENABLE_FB_LOGIN=$(escapeChars ${ENABLE_FB_LOGIN:-true})
 ENABLE_GOOGLE_LOGIN=$(escapeChars ${ENABLE_GOOGLE_LOGIN:-true})
-CUSTOM_SERVICE_LOGIN=$(escapeChars ${CUSTOM_SERVICE_LOGIN:-false})
-CUSTOM_SERVICE_API_BASE=$(escapeChars ${CUSTOM_SERVICE_API_BASE:-__custom_service_api_base__})
-OAUTH_SERVICE_SECRET=$(escapeChars ${OAUTH_SERVICE_SECRET:-__oauth_service_secret__})
-OAUTH_SERVICE_ID=$(escapeChars ${OAUTH_SERVICE_ID:-__oauth_service_id__})
+CUSTOM_CLIENT_LOGIN=$(escapeChars ${CUSTOM_CLIENT_LOGIN:-false})
+CUSTOM_CLIENT_API_BASE=$(escapeChars ${CUSTOM_CLIENT_API_BASE:-__custom_service_api_base__})
+OAUTH_CLIENT_SECRET=$(escapeChars ${OAUTH_CLIENT_SECRET:-__oauth_service_secret__})
+OAUTH_CLIENT_ID=$(escapeChars ${OAUTH_CLIENT_ID:-__oauth_service_id__})
 cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/etherpad.local.properties
 
 sed -i.bak s/__email_addresses_with_admin_access__/$ADMIN_EMAILS/g hackpad/etherpad/etc/etherpad.local.properties
@@ -54,10 +54,10 @@ sed -i.bak s/__enable_google_login__/$ENABLE_GOOGLE_LOGIN/g hackpad/etherpad/etc
 sed -i.bak s/__google_client_secret__/$GOOGLE_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_client_id__/$GOOGLE_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__enable_google_login__/$ENABLE_GOOGLE_LOGIN/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__enable_custom_service_login__/$CUSTOM_SERVICE_LOGIN/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__custom_service_api_base__/$CUSTOM_SERVICE_API_BASE/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__oauth_service_secret__/$OAUTH_SERVICE_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__oauth_service_id__/$OAUTH_SERVICE_ID/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__enable_custom_client_login__/$CUSTOM_CLIENT_LOGIN/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__custom_client_api_base__/$CUSTOM_CLIENT_API_BASE/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__oauth_client_secret__/$OAUTH_CLIENT_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__oauth_client_id__/$OAUTH_CIENT_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__custom_email_address__/$CUSTOM_EMAIL_ADDRESS/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_server__/$SMTP_SERVER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_user__/$SMTP_USER/g hackpad/etherpad/etc/etherpad.local.properties

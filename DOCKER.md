@@ -44,10 +44,10 @@ Getting it running
         SMTP_SERVER - The smtp server host (needs the PORT as well), ex. smtp.my.host:587
         SMTP_USER - SMTP username
         SMTP_PASS - SMTP password
-        CUSTOM_SERVICE_LOGIN - Enable Custom Service OAuth2 login (false is default)
-        CUSTOM_SERVICE_API_BASE - The Base API URL for the custom OAuth service
-        OAUTH_SERVICE_SECRET - Custom Service OAuth secret key
-        OAUTH_SERVICE_ID - Custom Service OAuth app id
+        CUSTOM_CLIENT_LOGIN - Enable Custom client OAuth2 login (false is default)
+        CUSTOM_CLIENT_API_BASE - The Base API URL for the custom client OAuth service
+        OAUTH_CLIENT_SECRET - Custom client OAuth secret key
+        OAUTH_CLIENT_ID - Custom client OAuth app id
         
         
         Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker run' command, e.x. "-e DB_HOST=localhost -e DB_PORT=3306" etc. 
