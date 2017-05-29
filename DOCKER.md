@@ -45,7 +45,7 @@ Getting it running
         SMTP_USER - SMTP username
         SMTP_PASS - SMTP password
         CUSTOM_CLIENT_LOGIN - Enable Custom client OAuth2 login (false is default)
-        CUSTOM_CLIENT_API_BASE - The Base API URL for the custom client OAuth service
+        CUSTOM_OAUTH_BASE_URL - The Base API URL for the custom client OAuth service
         OAUTH_CLIENT_SECRET - Custom client OAuth secret key
         OAUTH_CLIENT_ID - Custom client OAuth app id
         
