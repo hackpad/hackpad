@@ -258,6 +258,14 @@ function jsIncludes() {
   }
 }
 
+function getOauthImage() {
+  if (appjet.config.customOAuthClientImage == '__custom_oauth_client_image__') {
+    return 'no-image.png'
+  } else {
+    return appjet.config.customOAuthClientImage
+  }
+}
+
 function setNoJs(val) {
   _hd().noJs = val;
 }
