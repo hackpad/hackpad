@@ -35,6 +35,9 @@ CUSTOM_CLIENT_LOGIN=$(escapeChars ${CUSTOM_CLIENT_LOGIN:-false})
 CUSTOM_OAUTH_BASE_URL=$(escapeChars ${CUSTOM_OAUTH_BASE_URL:-__custom_client_api_base__})
 OAUTH_CLIENT_SECRET=$(escapeChars ${OAUTH_CLIENT_SECRET:-__oauth_service_secret__})
 OAUTH_CLIENT_ID=$(escapeChars ${OAUTH_CLIENT_ID:-__oauth_service_id__})
+CUSTOM_OAUTH_CLIENT_NAME=$(escapeChars ${CUSTOM_OAUTH_CLIENT_NAME:-__custom_oauth_client_name__})
+CUSTOM_OAUTH_CLIENT_IMAGE=$(escapeChars ${CUSTOM_OAUTH_CLIENT_IMAGE:-__custom_oauth_client_image__})
+DISABLE_DROPBOX_SYNC=$(escapeChars ${DISABLE_DROPBOX_SYNC:-false})
 cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/etherpad.local.properties
 
 sed -i.bak s/__email_addresses_with_admin_access__/$ADMIN_EMAILS/g hackpad/etherpad/etc/etherpad.local.properties
@@ -58,11 +61,14 @@ sed -i.bak s/__enable_custom_client_login__/$CUSTOM_CLIENT_LOGIN/g hackpad/ether
 sed -i.bak s/__custom_client_api_base__/$CUSTOM_OAUTH_BASE_URL/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__oauth_client_secret__/$OAUTH_CLIENT_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__oauth_client_id__/$OAUTH_CLIENT_ID/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__custom_oauth_client_name__/$CUSTOM_OAUTH_CLIENT_NAME/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__custom_oauth_client_image__/$CUSTOM_OAUTH_CLIENT_IMAGE/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__custom_email_address__/$CUSTOM_EMAIL_ADDRESS/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_server__/$SMTP_SERVER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_user__/$SMTP_USER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_password__/$SMTP_PASS/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__canonical_domain__/$CANONICAL_DOMAIN/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__disable_dropbox_sync__/$DISABLE_DROPBOX_SYNC/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(topdomains = \).*$/\1$TOP_DOMAINS/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(useHttpsUrls = \).*$/\1$USE_HTTPS_URLS/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(devMode = \).*$/\1 true/g" hackpad/etherpad/etc/etherpad.local.properties

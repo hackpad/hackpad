@@ -115,8 +115,7 @@
 
       <% if (helpers.allowCustomServiceSignin()) { %>
         <a id="login-stek" href="<%=serviceSignInUrl%>" class="stek-login-required" target="<%= typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self' %>">
-          <img class="fb-connect-button" src="<%=helpers.cdn()%>/static/img/logo-stek.svg">
-          <!--<span>Sign in with <strong>Stek.io</strong></span>-->
+          <img class="fb-connect-button" src="<%=helpers.cdn()%>/static/img/<%=helpers.getOauthImage()%>">
         </a>
       <% } %>
 
