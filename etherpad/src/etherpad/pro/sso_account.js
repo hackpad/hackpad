@@ -27,7 +27,7 @@ jimport("java.util.concurrent.ConcurrentHashMap");
 
 // The default set of permissions to ask the user for.
 var DEFAULT_SCOPES = [
-  "email",
+  "email"
 ];
 
 var CLIENT_DETAILS;
@@ -244,10 +244,6 @@ serverhandlers.tasks.loadPhoto = function(account, imageUrl) {
     s3.put("hackpad-profile-photos", account.email, photo.content, true, photo.contentType);
     pro_accounts.setAccountHasPhotoByEmail(account.id);
   }
-}
-
-function contactsForAccount(account) {
-  return _getCache("goog-user-data2").get(account.email.replace(/\./g, "@"));
 }
 
 function onStartup() {
