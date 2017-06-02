@@ -21,7 +21,7 @@ limitations under the License. */ %>
   helpers.includeCss("base.less");
   helpers.includeCss("home.less");
 
-  helpers.addToHead("<meta content='hackpad.com' name='title' />");
+  helpers.addToHead("<meta content='" + helpers.canonicalDomain() + "' name='title' />");
   helpers.addToHead("<meta content='Real-time collaborative wiki' name='description' />");
 
   helpers.setRobotsPolicy({index: false});

@@ -3,5 +3,5 @@
   <ShortName><%= helpers.siteName() %></ShortName>
   <Description>search hackpad</Description>
   <Url type="text/html" method="get" template="https://<%= host %>/ep/search/?q={searchTerms}"/>
-  <!--<Url type="application/json" rel="suggestions" template="https://hackpad.com/?q={searchTerms}"/>-->
+  <!--<Url type="application/json" rel="suggestions" template="https://<%= helpers.canonicalDomain() %>/?q={searchTerms}"/>-->
 </OpenSearchDescription>

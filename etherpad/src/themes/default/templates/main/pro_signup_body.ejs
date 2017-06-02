@@ -40,7 +40,7 @@ limitations under the License. */ %>
   <div id="top-center" style="position: relative;">
 
     <div id="logo-bar"></div>
-    <span id="title" style="color:white"><a style="color:white; text-decoration: none;" href="https://hackpad.com">hackpad</a> <div style="float: right; padding-right: 30px;">Private Site</div></span>
+    <span id="title" style="color:white"><a style="color:white; text-decoration: none;" href="https://<%= helpers.canonicalDomain() %>">hackpad</a> <div style="float: right; padding-right: 30px;">Private Site</div></span>
 
   </div>
 </div>
@@ -98,7 +98,7 @@ limitations under the License. */ %>
             <div style="position: relative;">
               <span style="width:13px; height: 13px;  position:absolute; opacity:0.8; left:6px; top:14px; z-index:10;">https://</span>
               <input type="text" id="subdomain" name="subdomain" placeholder="sitename" value="<%=subdomain%>" />
-              <span style="width:122px; height: 13px;  position:absolute; opacity:0.8; right:0px; top:14px; z-index:10;">.hackpad.com</span>
+              <span style="width:122px; height: 13px;  position:absolute; opacity:0.8; right:0px; top:14px; z-index:10;">.<%= helpers.canonicalDomain() %></span>
             </div>
           </div>
 

@@ -16,7 +16,7 @@
   helpers.includeJs('modals.js');
   helpers.includeJs("pad_modals.js");
 
-  helpers.addToHead("<meta content='hackpad.com' name='title' />");
+  helpers.addToHead("<meta content='" + helpers.canonicalDomain() + "' name='title' />");
   helpers.addToHead("<meta content='Real-time collaborative wiki' " +
       "name='description' />");
   helpers.addToHead("<link href='/static/img/hackpad-logo.png' " +

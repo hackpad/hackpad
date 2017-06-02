@@ -529,6 +529,10 @@ function supportEmailAddress() {
   return appjet.config.supportEmailAddress;
 }
 
+function canonicalDomain() {
+  return appjet.config['etherpad.canonicalDomain'];
+}
+
 
 // Takes an ISO time and returns a string representing how
 // long ago the date represents.
