@@ -517,6 +517,14 @@ function allowCustomServiceSignin() {
   }
 }
 
+function allowNormalLogin() {
+    if (appjet.config.enableNormalLogin == "false") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function supportEmailAddress() {
   return appjet.config.supportEmailAddress;
 }

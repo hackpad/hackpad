@@ -36,6 +36,7 @@ function _getDefaultConfig() {
     allowFacebookSignin: false,
     allowGoogleSignin: false,
     allowCustomServiceSignin: false,
+    allowNormalLogin: true,
     publicDomain: false,
     defaultGuestPolicy: "domain",
     allowMemberLinkAccess: false,
