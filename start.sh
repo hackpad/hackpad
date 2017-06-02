@@ -29,6 +29,10 @@ CUSTOM_EMAIL_ADDRESS=$(escapeChars ${CUSTOM_EMAIL_ADDRESS:-__custom_email_addres
 SMTP_SERVER=$(escapeChars ${SMTP_SERVER:-__smtp_server__})
 SMTP_USER=$(escapeChars ${SMTP_USER:-__smtp_user__})
 SMTP_PASS=$(escapeChars ${SMTP_PASS:-__smtp_password__})
+AWS_KEY_ID=$(escapeChars ${AWS_KEY_ID:-__aws_key_id__})
+AWS_SECRET=$(escapeChars ${AWS_SECRET:-__aws_secret__})
+S3_BUCKET=$(escapeChars ${S3_BUCKET:-__aws_attachments_bucket__})
+S3_REGION=$(escapeChars ${S3_REGION:-__aws_region__})
 ENABLE_FB_LOGIN=$(escapeChars ${ENABLE_FB_LOGIN:-true})
 ENABLE_GOOGLE_LOGIN=$(escapeChars ${ENABLE_GOOGLE_LOGIN:-true})
 CUSTOM_CLIENT_LOGIN=$(escapeChars ${CUSTOM_CLIENT_LOGIN:-false})
@@ -67,6 +71,10 @@ sed -i.bak s/__custom_email_address__/$CUSTOM_EMAIL_ADDRESS/g hackpad/etherpad/e
 sed -i.bak s/__smtp_server__/$SMTP_SERVER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_user__/$SMTP_USER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__smtp_password__/$SMTP_PASS/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__aws_key_id__/$AWS_KEY_ID/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__aws_secret__/$AWS_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__aws_attachments_bucket__/$S3_BUCKET/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__aws_region__/$S3_REGION/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__canonical_domain__/$CANONICAL_DOMAIN/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__disable_dropbox_sync__/$DISABLE_DROPBOX_SYNC/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(topdomains = \).*$/\1$TOP_DOMAINS/g" hackpad/etherpad/etc/etherpad.local.properties
