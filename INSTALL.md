@@ -48,6 +48,30 @@ INSTALLING ON POSIX COMPATIBLE SYSTEMS
 * If you want emoji support go to https://github.com/github/gemoji/tree/master/images/emoji/unicode
   and copy the images into etherpad/src/static/img/emoji/unicode/
   
+IMAGE UPLOAD FUNCTIONALITY
+
+1. Create an AWS IAM user with an Access Key (i.e. a tuple: Access Key ID and Secret Access Key)
+2. Create a bucker in S3 (say `hackbuck`)
+3. Configure hackpad with the AWS credentials (Adding the region as well)
+4. Grant PutObject, GetObject, DeleteObject, PutObjectAcl actions to all entities within the bucket: 
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:PutObjectAcl",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::hackbuck/*"
+            ]
+        }
+    ]
+}
+  
 INSTRUCTIONS ON HOW TO SETUP SOCIAL LOGINS
 
 * FACEBOOK
