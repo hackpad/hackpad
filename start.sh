@@ -41,6 +41,7 @@ OAUTH_CLIENT_SECRET=$(escapeChars ${OAUTH_CLIENT_SECRET:-__oauth_service_secret_
 OAUTH_CLIENT_ID=$(escapeChars ${OAUTH_CLIENT_ID:-__oauth_service_id__})
 CUSTOM_OAUTH_CLIENT_NAME=$(escapeChars ${CUSTOM_OAUTH_CLIENT_NAME:-__custom_oauth_client_name__})
 CUSTOM_OAUTH_CLIENT_IMAGE=$(escapeChars ${CUSTOM_OAUTH_CLIENT_IMAGE:-__custom_oauth_client_image__})
+GOOGLE_ANALYTICS_ID=$(escapeChars ${GOOGLE_ANALYTICS_ID:-__google_analytics_account__})
 DISABLE_DROPBOX_SYNC=$(escapeChars ${DISABLE_DROPBOX_SYNC:-false})
 cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/etherpad.local.properties
 
@@ -76,6 +77,7 @@ sed -i.bak s/__aws_secret__/$AWS_SECRET/g hackpad/etherpad/etc/etherpad.local.pr
 sed -i.bak s/__aws_attachments_bucket__/$S3_BUCKET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__aws_region__/$S3_REGION/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__canonical_domain__/$CANONICAL_DOMAIN/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__google_analytics_account__/$GOOGLE_ANALYTICS_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__disable_dropbox_sync__/$DISABLE_DROPBOX_SYNC/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(topdomains = \).*$/\1$TOP_DOMAINS/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(useHttpsUrls = \).*$/\1$USE_HTTPS_URLS/g" hackpad/etherpad/etc/etherpad.local.properties
