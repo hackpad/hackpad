@@ -35,6 +35,7 @@ S3_BUCKET=$(escapeChars ${S3_BUCKET:-__aws_attachments_bucket__})
 S3_REGION=$(escapeChars ${S3_REGION:-__aws_region__})
 ENABLE_FB_LOGIN=$(escapeChars ${ENABLE_FB_LOGIN:-true})
 ENABLE_GOOGLE_LOGIN=$(escapeChars ${ENABLE_GOOGLE_LOGIN:-true})
+ENABLE_FORM_LOGIN=$(escapeChars ${ENABLE_FORM_LOGIN:-true})
 CUSTOM_CLIENT_LOGIN=$(escapeChars ${CUSTOM_CLIENT_LOGIN:-false})
 CUSTOM_OAUTH_BASE_URL=$(escapeChars ${CUSTOM_OAUTH_BASE_URL:-__custom_client_api_base__})
 OAUTH_CLIENT_SECRET=$(escapeChars ${OAUTH_CLIENT_SECRET:-__oauth_service_secret__})
@@ -61,7 +62,7 @@ sed -i.bak s/__fb_secret__/$FB_SECRET/g hackpad/etherpad/etc/etherpad.local.prop
 sed -i.bak s/__enable_google_login__/$ENABLE_GOOGLE_LOGIN/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_client_secret__/$GOOGLE_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_client_id__/$GOOGLE_ID/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__enable_google_login__/$ENABLE_GOOGLE_LOGIN/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__enable_normal_login__/$ENABLE_FORM_LOGIN/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__enable_custom_client_login__/$CUSTOM_CLIENT_LOGIN/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__custom_client_api_base__/$CUSTOM_OAUTH_BASE_URL/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__oauth_client_secret__/$OAUTH_CLIENT_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
