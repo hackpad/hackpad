@@ -109,7 +109,7 @@
 </header>
 
 <nav id="sitebar">
-  <h1 id="sitebar-heading"><a href="https://<%= helpers.canonicalDomain() %>">hackpad</a></h1>
+  <h1 id="sitebar-heading"><a href="http<% helpers.useHttpsUrls() ? 's' : '' %>://<%= helpers.canonicalDomain() %>">hackpad</a></h1>
   <ul id="domain-list">
     <li class="domain-item domain-item-overflow">
       <%- template.use('button', null, {

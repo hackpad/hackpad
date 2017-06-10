@@ -537,6 +537,10 @@ function supportEmailAddress() {
   return appjet.config.supportEmailAddress;
 }
 
+function useHttpsUrls() {
+  return appjet.config.useHttpsUrls;
+}
+
 function canonicalDomain() {
   return appjet.config['etherpad.canonicalDomain'];
 }
@@ -670,8 +674,8 @@ function _getCSPPolicy() {
       "https://gist.github.com/"
     ],
     "frame-ancestors": [SELF],
-    "report-uri": ["https://"+ appjet.config['etherpad.canonicalDomain'] +"/csp_log"],
-    "referrer": ["origin-when-crossorigin"]
+    "report-uri": ["https://"+ appjet.config['etherpad.canonicalDomain'] +"/csp_log"]
+    //"referrer": ["origin-when-crossorigin"]
   };
 
   if (cdn()) {
