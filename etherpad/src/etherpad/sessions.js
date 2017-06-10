@@ -193,7 +193,7 @@ function preRequestCookieCheck() {
         (request.params.setCookie) &&
         (request.params.contUrl)) {
 
-      // Make sure we're redirecting to a hackpad.com URL; otherwise go to /
+      // Make sure we're redirecting to a URL matching the canonicalDomain; otherwise go to /
       var contUrl = pad_security.sanitizeContUrlForCookies(request.params.contUrl);
       if (contUrl.indexOf("?") == -1) {
         contUrl += "?";

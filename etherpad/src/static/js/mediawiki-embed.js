@@ -16,8 +16,8 @@
         hackpad: { 
             name: 'hackpad',
             tabTitle: 'HackPad',
-            url: 'https://hackpad.com/ep/pad/anon',
-            protoHostPort: 'https://hackpad.com'
+            url: 'https://' + appjet.config['etherpad.canonicalDomain'] + '/ep/pad/anon',
+            protoHostPort: 'https://' + appjet.config['etherpad.canonicalDomain']
         },
         test: {
             name: 'test',

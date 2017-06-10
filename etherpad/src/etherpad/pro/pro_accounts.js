@@ -1217,7 +1217,7 @@ function getPicById(id, large) {
         photoUrl = "https://graph.facebook.com/" + r.fbid + "/picture?type=" + (large ? "large" : "square");
       } else if (r && r.email) {
         var photoUrl = "https://www.gravatar.com/avatar.php?default=" +
-            encodeURIComponent("https://hackpad.com/static/img/nophoto.png") +
+            encodeURIComponent("https://" + appjet.config['etherpad.canonicalDomain'] +"/static/img/nophoto.png") +
             "&gravatar_id=" + md5(trim(r.email).toLowerCase()) + "&size=100";
       }
       cache[key] = photoUrl;

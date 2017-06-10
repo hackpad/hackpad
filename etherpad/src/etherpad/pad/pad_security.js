@@ -506,7 +506,7 @@ function padIdsUserCanSee(userId, globalPadIds, optCreatorForPadId) {
       // note that we treat all pads which belong to a collection that the user is in
       // for the purpose of "visibility" as pads that the user is "following";
       // ie. pads they have the link for; true even if the user unfollowed the pad
-      // this only matters on hackpad.com or where allowMemberLinkAccess is true
+      // this only matters on the canonicalDomain or where allowMemberLinkAccess is true
       var mustSeeViaCollection = mustFollowGlobalIds.filter(function(padId) {
         return followedPads.indexOf(padId) == -1;
       });
@@ -547,7 +547,7 @@ function filterOutPadsCurrentUserCannotSee(listOfPads) {
 */
 
 function sanitizeContUrl(cont) {
-  // hackpadSiteRegExp should match ANY *.hackpad.com page
+  // hackpadSiteRegExp should match ANY *.<canonicalDomain> page
   var hackpadSiteRegExp = new RegExp("^\/[_:/?#+=a-z0-9-]*|^https?:\/\/([_a-z0-9-]+\.)?" + appjet.config['etherpad.canonicalDomain'] + "($|\:|\/)", "i");
   if (cont.match(hackpadSiteRegExp)){
     return cont;

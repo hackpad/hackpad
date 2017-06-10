@@ -55,10 +55,10 @@ function render_step1Post_post() {
   // set default email message for mailing lists
   if (!newSiteData.defaultWelcomeEmailSubject) {
     newSiteData.defaultWelcomeEmailSubject = getSessionProAccount().fullName;
-    newSiteData.defaultWelcomeEmailSubject += " invited you to " + newSiteData.shortName + ".hackpad.com";
+    newSiteData.defaultWelcomeEmailSubject += " invited you to " + newSiteData.shortName + "." + appjet.config['etherpad.canonicalDomain'];
   }
   if (!newSiteData.defaultWelcomeEmailBody) {
-    newSiteData.defaultWelcomeEmailBody = "Come and hack with me: https://" + newSiteData.shortName + ".hackpad.com/\n\n";
+    newSiteData.defaultWelcomeEmailBody = "Come and hack with me: https://" + newSiteData.shortName + "." + appjet.config['etherpad.canonicalDomain'] + "/\n\n";
     newSiteData.defaultWelcomeEmailBody += "Hackpad is a collaborative editing tool that allows us all to work on the same document together in real time.\n\n";
     newSiteData.defaultWelcomeEmailBody += "You can create new documents, and they will be automatically shared with members of the site."
   }

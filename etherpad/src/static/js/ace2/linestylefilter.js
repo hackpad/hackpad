@@ -21,8 +21,8 @@
 // THIS FILE IS ALSO AN APPJET MODULE: etherpad.collab.ace.linestylefilter
 if (typeof(server_side_import)!='undefined') {
   server_side_import("etherpad.collab.ace.easysync2.Changeset");
+  server_side_import("etherpad.collab.ace.easysync2.Changeset");
 }
-
 
 var linestylefilter = {};
 
@@ -65,7 +65,7 @@ linestylefilter.className2Author = function(className) {
   return null;
 }
 
-var RELATIVE_URL_RE = new RegExp("^(/|https?://[\w\.]*hackpad.com).*");
+var RELATIVE_URL_RE = new RegExp("^(/|https?://[\w\.]*"+linestylefilter['etherpad.canonicalDomain']+").*");
 
 // lineLength is without newline; aline includes newline,
 // but may be falsy if lineLength == 0

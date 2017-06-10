@@ -80,7 +80,7 @@ function render_delete_post() {
   pro_accounts.setDeleted(getSessionProAccount());
   pro_accounts.signOut();
 
-  // Go to hackpad.com
+  // Go to the site canonicalDomain
   var superDomainUrl = utils.absoluteURL('/',{},"");
 
   response.redirect(superDomainUrl);

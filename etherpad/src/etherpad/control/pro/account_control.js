@@ -805,7 +805,7 @@ function render_validate_email_both() {    // token
   } else if (password && (token == signup.token) && request.method == "POST") {
     var loginAttempts = _getExpiringLogginAttemptMap().get(email) || 0;
     if (loginAttempts > MAX_LOGIN_ATTEMPTS_PER_DAY) {
-      _handleError("Too many login attempts.  Please contact support@hackpad.com");
+      _handleError("Too many login attempts.  Please contact support@"+ appjet.config['etherpad.canonicalDomain']);
     }
     _getExpiringLogginAttemptMap().put(email, loginAttempts + 1);
 
