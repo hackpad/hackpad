@@ -30,10 +30,14 @@ import("etherpad.control.pro.admin.account_manager_control");
 
 import("etherpad.helpers");
 
+function redirectToHome() {
+    if (! helpers.allowWorkspaceCreation() == true) {
+        response.redirect('/');
+    }
+}
+
 function render_main_get() {
-  if (! helpers.allowWorkspaceCreation() == true) {
-      response.redirect('/');
-  }
+  redirectToHome();
   pro_accounts.requireAccount("Sign in to create a new Hackpad Space.");
 
   var newSiteData = getSession().newSiteData || {};
@@ -48,6 +52,7 @@ function render_main_get() {
 
 // Step 1 form post via AJAX
 function render_step1Post_post() {
+  redirectToHome();
   var siteName = request.params.name;
   var shortName = request.params.shortname;
   var permission = request.params.permission;
@@ -81,6 +86,7 @@ function render_step1Post_post() {
 
 // Step 2 form post via AJAX
 function render_step2Post_post() {
+  redirectToHome();
   var allowAllFromDomain = request.params.allowAllFromDomain;
   var emailInvites = request.params["emailInvites[]"];
   var notificationAddress = request.params.notificationAddress;
