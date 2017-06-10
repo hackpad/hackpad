@@ -29,8 +29,6 @@
   <% } %>
 <% return ejs_data; }); %>
 
-
-
 <% template.define('app-login-form', function() { var ejs_data=''; %>
   <%- template.use('connect-buttons',null ,"signin"); %>
 
@@ -115,7 +113,7 @@
 
       <% if (helpers.allowCustomServiceSignin()) { %>
         <a id="login-stek" href="<%=serviceSignInUrl%>" class="stek-login-required" target="<%= typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self' %>">
-          <img class="fb-connect-button" src="<%=helpers.cdn()%>/static/img/<%=helpers.getOauthImage()%>">
+          <img class="fb-connect-button" src="<%=helpers.getOauthImage()%>">
         </a>
       <% } %>
 

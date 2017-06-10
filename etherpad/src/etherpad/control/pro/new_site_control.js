@@ -31,6 +31,9 @@ import("etherpad.control.pro.admin.account_manager_control");
 import("etherpad.helpers");
 
 function render_main_get() {
+  if (! helpers.allowWorkspaceCreation() == true) {
+      response.redirect('/');
+  }
   pro_accounts.requireAccount("Sign in to create a new Hackpad Space.");
 
   var newSiteData = getSession().newSiteData || {};
