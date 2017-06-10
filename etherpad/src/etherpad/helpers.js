@@ -662,8 +662,8 @@ function _getCSPPolicy() {
       "https://gist.github.com/"
     ],
     "frame-ancestors": [SELF],
-    "report-uri": ["https://"+ appjet.config['etherpad.canonicalDomain'] +"/csp_log"],
-    "referrer": ["origin-when-crossorigin"]
+    "report-uri": ["https://"+ appjet.config['etherpad.canonicalDomain'] +"/csp_log"]
+    //"referrer": ["origin-when-crossorigin"]
   };
 
   if (cdn()) {
