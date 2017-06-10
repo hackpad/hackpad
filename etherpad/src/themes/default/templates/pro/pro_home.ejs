@@ -199,7 +199,7 @@ limitations under the License. */ %>
 
 
   <!-- promos (mainsite only) -->
-  <% if (!isSubDomain) { %>
+  <% if (!isSubDomain && helpers.allowWorkspaceCreation() == true) { %>
     <div id="promo-hiring" style="border-bottom:1px solid #ccc; margin-top:30px; border-top: 1px solid #ccc; padding-top:10px; padding-bottom:10px;" class="iphonehide ipadhide">
 
       <a href="/ep/new-site" style="font-size:15px;">Create a private space for your team</a>
