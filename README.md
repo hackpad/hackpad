@@ -1,4 +1,15 @@
 # About Hackpad
+
+## Hackpad.com is closing down. Developers we need your help!
+
+Hackpad.com is closing down, but fortunately Dropbox has open sourced the code. 
+
+There hasn't been any development on the original repository since 2015, which is why we picked it up at a new location.
+
+This repository is being developed actively, and we are in need of any type of contributor. Do you have Javascript or other relevant skills, please contact us at opensource@stek.io so you can join the team. Or simply issue a Pull request.
+
+------
+
 Hackpad is a web-based realtime wiki, based on the open source EtherPad collaborative document editor.
 
 
