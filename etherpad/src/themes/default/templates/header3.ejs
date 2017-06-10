@@ -117,9 +117,12 @@
         menu: [{}]
       }); %>
     </li>
-    <li class="domain-item domain-item-new">
-      <a href="/ep/new-site" id="create-space">+ new workspace</a>
-    </li>
+
+    <% if (helpers.allowWorkspaceCreation()) { %>
+      <li class="domain-item domain-item-new">
+        <a href="/ep/new-site" id="create-space">+ new workspace</a>
+      </li>
+    <% } %>
   </ul>
 
   <div id="account">

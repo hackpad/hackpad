@@ -35,6 +35,7 @@ function _getDefaultConfig() {
     defaultPadText: "",
     allowFacebookSignin: false,
     allowGoogleSignin: false,
+    allowWorkspaceCreation: true,
     allowCustomServiceSignin: false,
     allowNormalLogin: true,
     publicDomain: false,

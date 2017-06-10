@@ -509,11 +509,19 @@ function allowGoogleSignin() {
   }
 }
 
+function allowWorkspaceCreation() {
+    if (appjet.config.disableWorkspaceCreation == "true") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function allowCustomServiceSignin() {
-  if (appjet.config.enableCustomServiceSignin == "false") {
-    return false;
-  } else {
+  if (appjet.config.enableCustomOauthServiceSignin == "true") {
     return true;
+  } else {
+    return false;
   }
 }
 
