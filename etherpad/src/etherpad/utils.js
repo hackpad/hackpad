@@ -655,7 +655,10 @@ function isAPIRequest() {
 
 function httpsHost(h) {
   h = h.split(":")[0];  // strip any existing port
-  if (appjet.config.listenSecurePort != "443" && !appjet.config.hidePorts) {
+    if (appjet.config.listenSecurePort != "443"
+        && (typeof appjet.config.listenSecurePort != 'undefined')
+        && appjet.config.listenSecurePort != '0'
+        && !appjet.config.hidePorts){
     h = (h + ":" + appjet.config.listenSecurePort);
   }
   return h;
@@ -663,7 +666,10 @@ function httpsHost(h) {
 
 function httpHost(h) {
   h = h.split(":")[0];  // strip any existing port
-  if (appjet.config.listenPort != "80" && !appjet.config.hidePorts) {
+  if (appjet.config.listenPort != "80"
+      && (typeof appjet.config.listenSecurePort != 'undefined')
+      && appjet.config.listenSecurePort != '0'
+      && !appjet.config.hidePorts) {
     h = (h + ":" + appjet.config.listenPort);
   }
   return h;
