@@ -537,6 +537,10 @@ function supportEmailAddress() {
   return appjet.config.supportEmailAddress;
 }
 
+function useHttpsUrls() {
+  return appjet.config.useHttpsUrls;
+}
+
 function canonicalDomain() {
   return appjet.config['etherpad.canonicalDomain'];
 }
