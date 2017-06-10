@@ -49,7 +49,7 @@ Getting it running
         OAUTH_CLIENT_SECRET - Custom client OAuth secret key
         OAUTH_CLIENT_ID - Custom client OAuth app id
         CUSTOM_OAUTH_CLIENT_NAME - The name of the service with which the user will authenticate
-        CUSTOM_OAUTH_CLIENT_IMAGE - The image of the auth service to show in the login popup. This image should be uploaded to the folder etherpad/src/static/img/ (e.g. value company-logo.png)
+        CUSTOM_OAUTH_CLIENT_IMAGE - The image of the auth service to show in the login popup. This image can be a URL, you can also upload an image to the folder etherpad/src/static/img/ and use this path along with the uploaded image name  (e.g. value "/static/img/company-logo.png")
         GOOGLE_ANALYTICS_ID - Add it to keep track of analytics data
         DISABLE_DROPBOX_SYNC - Weather to disable or not the dropbox sync task (defaults to false, i.e. keep the sync enabled)
         ENABLE_FORM_LOGIN - Enable or disable normal form login/registration
@@ -57,6 +57,7 @@ Getting it running
         AWS_SECRET - Your AWS Secret Access Key
         S3_BUCKET - The bucket in which files will be stored
         S3_REGION - Regional endpoint to make your requests
+        DISABLE_WORKSPACE_CREATION - Weather or not to disable workspace creations (defaults to false)
         
         
         Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker run' command, e.x. "-e DB_HOST=localhost -e DB_PORT=3306" etc. 
