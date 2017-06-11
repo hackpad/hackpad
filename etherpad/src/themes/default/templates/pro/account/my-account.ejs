@@ -127,6 +127,7 @@ limitations under the License. */ %>
 
   </table>
 
+  <% if (appjet.config.disableDropboxSync != 'true') { %>
 <h2>Dropbox Sync</h2>
 
       <div style="font-size:13px; text-align:right; padding-top:0px;">
@@ -157,7 +158,7 @@ limitations under the License. */ %>
         <% } %>
         </td></tr></table>
       </div>
-
+<% } %>
 
 
 <h2>Site membership</h2>
