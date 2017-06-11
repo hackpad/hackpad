@@ -32,6 +32,7 @@ import("etherpad.pro.pro_config");
 import("etherpad.pro.pro_accounts");
 import("etherpad.pro.pro_accounts.getSessionProAccount");
 import("etherpad.sessions");
+import("etherpad.log");
 
 //----------------------------------------------------------------
 // array that supports contains() in O(1)
@@ -595,8 +596,10 @@ function cdn() {
   if (isProduction()) {
     if (appjet.config['etherpad.fakeProduction'] == "true") { return ""; }
 
-    if (appjet.config['etherpad.cdnUrl']) {
-      return appjet.config['etherpad.cdnUrl'];
+    if (appjet.config.cdnUrl != '__cdn_url__' && (typeof appjet.config.cdnUrl != 'undefined'))   {
+      return appjet.config.cdnUrl;
+    } else {
+      return "";
     }
   } else {
     return "";

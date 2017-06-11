@@ -45,6 +45,8 @@ CUSTOM_OAUTH_CLIENT_IMAGE=$(escapeChars ${CUSTOM_OAUTH_CLIENT_IMAGE:-__custom_oa
 GOOGLE_ANALYTICS_ID=$(escapeChars ${GOOGLE_ANALYTICS_ID:-__google_analytics_account__})
 DISABLE_DROPBOX_SYNC=$(escapeChars ${DISABLE_DROPBOX_SYNC:-false})
 DISABLE_WORKSPACE_CREATION=$(escapeChars ${DISABLE_WORKSPACE_CREATION:-__disable_creating_workspaces__})
+IS_PRODUCTION=$(escapeChars ${IS_PRODUCTION:-true})
+DEV_MODE=$(escapeChars ${DEV_MODE:-false})
 cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/etherpad.local.properties
 
 sed -i.bak s/__email_addresses_with_admin_access__/$ADMIN_EMAILS/g hackpad/etherpad/etc/etherpad.local.properties
@@ -84,8 +86,8 @@ sed -i.bak s/__disable_dropbox_sync__/$DISABLE_DROPBOX_SYNC/g hackpad/etherpad/e
 sed -i.bak s/__disable_creating_workspaces__/$DISABLE_WORKSPACE_CREATION/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(topdomains = \).*$/\1$TOP_DOMAINS/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(useHttpsUrls = \).*$/\1$USE_HTTPS_URLS/g" hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak "s/^\(devMode = \).*$/\1 true/g" hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak "s/^\(etherpad\.isProduction = \).*$/\1false/g" hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak "s/^\(devMode = \).*$/\1$DEV_MODE/g" hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak "s/^\(etherpad\.isProduction = \).*$/\1$IS_PRODUCTION/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(logDir = \).*$/\1.\/data\/logs/g" hackpad/etherpad/etc/etherpad.local.properties
 echo 'verbose = true' >> hackpad/etherpad/etc/etherpad.local.properties
 

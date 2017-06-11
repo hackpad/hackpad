@@ -31,9 +31,9 @@ Getting it running
         DB_PASSWORD - mysql user password (default: password)
         TOP_DOMAINS - comma-separated top level domains (default: localhost,localbox.info)
         USE_HTTPS_URLS - should hackpad emit the absolute urls using https as opposed to http (default: false)
-        DEFAULT_ENCRYPTION_KEY - Set the default encryption key (defaultIdEncryptionKey setting)
-        ACCOUNT_ENCRYPTION_KEY - Set an encryption key for accounts (accountIdEncryptionKey setting)
-        COLLECTION_ENCRYPTION_KEY - Set an encryption key for collections (collectionIdEncryptionKey setting)
+        DEFAULT_ENCRYPTION_KEY - Set the default encryption key (It needs to be a HEXadecimal value)
+        ACCOUNT_ENCRYPTION_KEY - Set an encryption key for accounts (It needs to be a HEXadecimal value)
+        COLLECTION_ENCRYPTION_KEY - Set an encryption key for collections (It needs to be a HEXadecimal value)
         ENABLE_GOOGLE_LOGIN - Enable Google OAuth2 login (true by default)
         GOOGLE_SECRET - Google OAuth secret key
         GOOGLE_ID - Google OAuth app id
@@ -58,6 +58,8 @@ Getting it running
         S3_BUCKET - The bucket in which files will be stored
         S3_REGION - Regional endpoint to make your requests
         DISABLE_WORKSPACE_CREATION - Weather or not to disable workspace creations (defaults to false)
+        IS_PRODUCTION - Define if the environment you will be building the docker image is production or not (defaults to true)
+        DEV_MODE - Enable/Disable devMode (defaults to false)
         
         
         Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker run' command, e.x. "-e DB_HOST=localhost -e DB_PORT=3306" etc. 
