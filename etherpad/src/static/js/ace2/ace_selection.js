@@ -668,7 +668,7 @@ ace.selection = function(editor) {
       if (url.indexOf(domain) == 0) {
         url = url.substring(domain.length);
         if (url[0] != '/') {
-          // Prevent url like https://hackpad.com:9000javascript:alert('xss')
+          // Prevent url like https://<canonicalDomain>:9000javascript:alert('xss')
           url = '/' + url;
         }
       }

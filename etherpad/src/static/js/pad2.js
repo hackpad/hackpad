@@ -397,7 +397,7 @@ var pad = {
     if (event.data == "wpSave") {
       var byLine = padeditor.ace.getAuthorNames().join(", ");
       var message = {
-          comment: 'Edited collaboratively by ' + byLine + ' using http://hackpad.com',
+          comment: 'Edited collaboratively by ' + byLine + ' using http://' + appjet.config['etherpad.canonicalDomain'],
           content: padeditor.ace.exportText()
       };
       window.parent.postMessage(JSON.stringify(message), "*");

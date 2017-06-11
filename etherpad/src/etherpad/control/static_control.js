@@ -98,7 +98,7 @@ function serveSitemapXml(subDomain) {
   response.neverCache();
   response.setContentType('text/xml; charset=utf-8');
 
-  // don't response to x.hackpad.com/sitemap-y.xml
+  // don't response to x.<canonicalDomain>/sitemap-y.xml
   if (subDomain && !domains.isPrimaryDomainRequest()) {
     return render404();
   }

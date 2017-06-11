@@ -260,7 +260,7 @@ var padmodals = (function() {
       }
       function error(e) {
         setSendingFeedback(false);
-        $("#feedbackbox-response").text("Could not send feedback.  Please email us at support"+"@"+"hackpad.com instead.").get(0).className = 'badresponse';
+        $("#feedbackbox-response").text("Could not send feedback.  Please email us at support"+"@" + appjet.config['etherpad.canonicalDomain'] + " instead.").get(0).className = 'badresponse';
         $("#feedbackbox-response").show();
       }
     },

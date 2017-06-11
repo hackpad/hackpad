@@ -9,7 +9,7 @@ import("stringutils");
 function run() {
 
   var testPrivateDomain = "unittestprivate" + stringutils.randomString(10).toLowerCase();
-  var testEmailAddy = "noreply+" + stringutils.randomString(10).toLowerCase() + "@hackpad.com";
+  var testEmailAddy = "noreply+" + stringutils.randomString(10).toLowerCase() + "@" + appjet.config['etherpad.canonicalDomain'];
 
   var testPrivateDomainId = domains.createNewSubdomain(testPrivateDomain, testPrivateDomain);
 

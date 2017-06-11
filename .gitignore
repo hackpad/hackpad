@@ -28,7 +28,7 @@ build-stamp
 infrastructure/lib/mysql-*.jar
 .tags
 .tags_sorted_by_file
-
+.idea
 # https://gist.github.com/3786883
 #########################
 # .gitignore file for Xcode4 / OS X Source projects

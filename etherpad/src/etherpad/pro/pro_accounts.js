@@ -252,6 +252,10 @@ function maybeSignInBasedOnAccount(otherSession, autoJoin) {
     if (otherSession.isGoogleConnected) {
       pro_account_auto_signin.setGoogleAutoSigninCookie(true);
     }
+    getSession().isOauthServiceConnected = otherSession.isOauthServiceConnected;
+    if (otherSession.isOauthServiceConnected) {
+      pro_account_auto_signin.setOauthServiceAutoSigninCookie(true);
+    }
     getSession().dropboxTokenInfo = otherSession.dropboxTokenInfo;
     signInSession(matchingAcct);
 
@@ -862,6 +866,7 @@ function signOut() {
   delete getSession().proAccount;
   delete getSession().facebookInfo;
   delete getSession().isGoogleConnected;
+  delete getSession().isOauthServiceConnected;
   delete getSession().dropboxTokenInfo;
   sessions.saveSession();
 
@@ -1212,7 +1217,7 @@ function getPicById(id, large) {
         photoUrl = "https://graph.facebook.com/" + r.fbid + "/picture?type=" + (large ? "large" : "square");
       } else if (r && r.email) {
         var photoUrl = "https://www.gravatar.com/avatar.php?default=" +
-            encodeURIComponent("https://hackpad.com/static/img/nophoto.png") +
+            encodeURIComponent("https://" + appjet.config['etherpad.imgDefaultDomain'] +"/static/img/nophoto.png") +
             "&gravatar_id=" + md5(trim(r.email).toLowerCase()) + "&size=100";
       }
       cache[key] = photoUrl;

@@ -32,7 +32,7 @@ function run() {
   // Configuration
   var testPublicDomain = publicDomainRecord().subDomain;
   var testPrivateDomain = privateDomainRecord().subDomain;
-  var testEmailAddy = "noreply+" + stringutils.randomString(10).toLowerCase() + "@hackpad.com";
+  var testEmailAddy = "noreply+" + stringutils.randomString(10).toLowerCase() + "@" + appjet.config['etherpad.canonicalDomain'];
 
   // very beginnings of a test suite for access control!
   var publicDomainId = publicDomainRecord().id;

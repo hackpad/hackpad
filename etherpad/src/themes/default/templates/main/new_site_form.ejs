@@ -54,7 +54,8 @@
               <h1>Create your new space</h1>
                 <div class="form_body">
                   <input type="text" id="company_field" name="name" placeholder="Company, Group, Org or Team Name" minlength="3" value="<%= newSiteData.name %>" required />
-                  <input type="text" id="shortname" name="shortname" value="<%= newSiteData.shortName %>" class="subdomain" placeholder="spacename" minlength="3" required /> <span class="domain">.hackpad.com</span>
+                  <input type="text" id="shortname" name="shortname" value="<%= newSiteData.shortName %>"
+    class="subdomain" placeholder="spacename" minlength="3" required /> <span class="domain">.<%= helpers.canonicalDomain() %></span>
 
                   <div class="space_selection">
                       <input type="radio" name="permission" value="private" id="private_radio" <% if (!newSiteData.type || newSiteData.type == "private") { %>checked<% } %>>
@@ -69,6 +70,7 @@
                     <div class="radio_info radio_info-last">
                       <p>Anyone can join and edit this space.</p>
                       <p><span class="price">Free for unlimited users</span></p>
+      
                     </div>
                   </div>
                 </div>

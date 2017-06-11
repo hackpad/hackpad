@@ -69,7 +69,7 @@ function _withCache(func) {
       cache.allConnections = new ConcurrentSkipListMap();
     }
     if (! cache.sites) {
-      // site (e.g. bar.hackpad.com) ->
+      // site (e.g. bar.<canonicalDomain>) ->
       //    { connections: CopyOnWriteArraySet<connectionId> }
       cache.sites = new ConcurrentSkipListMap();
     }

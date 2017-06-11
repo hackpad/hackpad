@@ -109,7 +109,7 @@
 </header>
 
 <nav id="sitebar">
-  <h1 id="sitebar-heading"><a href="https://hackpad.com">hackpad</a></h1>
+  <h1 id="sitebar-heading"><a href="http<% helpers.useHttpsUrls() ? 's' : '' %>://<%= helpers.canonicalDomain() %>">hackpad</a></h1>
   <ul id="domain-list">
     <li class="domain-item domain-item-overflow">
       <%- template.use('button', null, {
@@ -117,9 +117,12 @@
         menu: [{}]
       }); %>
     </li>
-    <li class="domain-item domain-item-new">
-      <a href="/ep/new-site" id="create-space">+ new workspace</a>
-    </li>
+
+    <% if (helpers.allowWorkspaceCreation()) { %>
+      <li class="domain-item domain-item-new">
+        <a href="/ep/new-site" id="create-space">+ new workspace</a>
+      </li>
+    <% } %>
   </ul>
 
   <div id="account">

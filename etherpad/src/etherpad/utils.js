@@ -41,6 +41,7 @@ import("etherpad.pro.pro_config");
 import("etherpad.pro.pro_accounts");
 import("etherpad.pro.pro_accounts.getSessionProAccount");
 import("etherpad.pro.google_account");
+import("etherpad.pro.sso_account");
 import("etherpad.pro.pro_oauth");
 import("etherpad.log");
 
@@ -180,6 +181,9 @@ function renderTemplateAsString(filename, data) {
     data.session = getSession();
     if (!data["googleSignInUrl"]) {
       data.__defineGetter__("googleSignInUrl", function () {  return domains.getRequestDomainRecord() ? google_account.googleOAuth2URLForLogin() : ""; });
+    }
+    if (!data["serviceSignInUrl"]) {
+      data.__defineGetter__("serviceSignInUrl", function () {  return domains.getRequestDomainRecord() ? sso_account.serviceOAuth2URLForLogin() : ""; });
     }
     data.isSubDomain = !domains.isPrimaryDomainRequest();
     data.renderPartial = data.renderPartial || false;
@@ -651,7 +655,10 @@ function isAPIRequest() {
 
 function httpsHost(h) {
   h = h.split(":")[0];  // strip any existing port
-  if (appjet.config.listenSecurePort != "443" && !appjet.config.hidePorts) {
+    if (appjet.config.listenSecurePort != "443"
+        && (typeof appjet.config.listenSecurePort != 'undefined')
+        && appjet.config.listenSecurePort != '0'
+        && !appjet.config.hidePorts){
     h = (h + ":" + appjet.config.listenSecurePort);
   }
   return h;
@@ -659,7 +666,10 @@ function httpsHost(h) {
 
 function httpHost(h) {
   h = h.split(":")[0];  // strip any existing port
-  if (appjet.config.listenPort != "80" && !appjet.config.hidePorts) {
+  if (appjet.config.listenPort != "80"
+      && (typeof appjet.config.listenSecurePort != 'undefined')
+      && appjet.config.listenSecurePort != '0'
+      && !appjet.config.hidePorts) {
     h = (h + ":" + appjet.config.listenPort);
   }
   return h;

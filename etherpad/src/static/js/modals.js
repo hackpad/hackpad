@@ -202,28 +202,29 @@ $(document).ready(function(){
           'top': $('#login-email-wrapper').position().top
         });
         $('#login-email-wrapper').data('originalPositionTop', originalPositionTop);
-        $('#login-google, #login-facebook, #login-or').fadeOut(400, function() {
+        $('#login-google, #login-facebook, #login-or, #login-stek').fadeOut(200, function() {
           $('#login-email-wrapper').removeClass('no-transition').
               css('top', '40px');
-          setTimeout(function() {
-            $('#login-email-wrapper').addClass('no-transition').css({
-              'position': 'relative',
-              'width': '100%',
-              'top': 0
-            });
-            $('#login-form').addClass('active');
-            $('#login-email-secondary').fadeIn();
-            $('#login-email-secondary .icon-back').fadeIn();
-            setTimeout(function() { $('#login-password').focus() }, 0);
-
-
-            if (isSignup) {
-              switchToSignup();
-            } else {
-              switchToLogin();
-            }
-          }, 200);
         });
+
+          setTimeout(function() {
+              $('#login-email-wrapper').addClass('no-transition').css({
+                  'position': 'relative',
+                  'width': '100%',
+                  'top': 0
+              });
+              $('#login-form').addClass('active');
+              $('#login-email-secondary').fadeIn();
+              $('#login-email-secondary .icon-back').fadeIn();
+              setTimeout(function() { $('#login-password').focus() }, 0);
+
+
+              if (isSignup) {
+                  switchToSignup();
+              } else {
+                  switchToLogin();
+              }
+          }, 400);
       }
     };
 

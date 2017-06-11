@@ -488,7 +488,9 @@ serverhandlers.tasks.syncDropbox = function() {
 }
 
 function onStartup() {
-  execution.initTaskThreadPool("dropbox-sync", 1);
-  var initialDelay = isProduction() ? 5*60*1000 : 5*1000;
-  execution.scheduleTask('dropbox-sync', "syncDropbox", initialDelay, []);
+  if (appjet.config.disableDropboxSync != "true") {
+    execution.initTaskThreadPool("dropbox-sync", 1);
+    var initialDelay = isProduction() ? 5*60*1000 : 5*1000;
+    execution.scheduleTask('dropbox-sync', "syncDropbox", initialDelay, []);
+  }
 }

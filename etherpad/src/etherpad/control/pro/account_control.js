@@ -44,6 +44,7 @@ import("etherpad.pro.pro_accounts");
 import("etherpad.pro.pro_accounts.getSessionProAccount");
 import("etherpad.pro.domains");
 import("etherpad.pro.google_account");
+import("etherpad.pro.sso_account");
 import("etherpad.pro.pro_utils");
 import("etherpad.pro.pro_account_auto_signin");
 import("etherpad.pro.pro_config");
@@ -271,6 +272,7 @@ function render_sign_in_get() {
       email:contParams.email?contParams.email:"",
       inviteToken: contParams.token || request.params.inviteToken,
       googleSignInUrl: google_account.googleOAuth2URLForLogin(),
+      serviceSignInUrl: sso_account.serviceOAuth2URLForLogin(),
       isSubDomain: !domains.isPrimaryDomainRequest(),
       asNewAccount: asNewAccount
     };
@@ -803,7 +805,7 @@ function render_validate_email_both() {    // token
   } else if (password && (token == signup.token) && request.method == "POST") {
     var loginAttempts = _getExpiringLogginAttemptMap().get(email) || 0;
     if (loginAttempts > MAX_LOGIN_ATTEMPTS_PER_DAY) {
-      _handleError("Too many login attempts.  Please contact support@hackpad.com");
+      _handleError("Too many login attempts.  Please contact support@"+ appjet.config['etherpad.canonicalDomain']);
     }
     _getExpiringLogginAttemptMap().put(email, loginAttempts + 1);
 
@@ -967,8 +969,14 @@ function render_google_sign_in_get() {
 
 // Google oAuth2 callback
 // URL is fixed to avoid breaking the iOS app
-function render_openid_get() {
+/*function render_openid_get() {
   return google_account.handleLoginCallback();
+}*/
+
+// Google oAuth2 callback
+// URL is fixed to avoid breaking the iOS app
+function render_openid_get() {
+  return sso_account.handleLoginCallback();
 }
 
  // Once Google oAuth2 flow is completed, we proceed here
@@ -1012,6 +1020,68 @@ function completeGoogleSignIn(email, fullName, tryAgainUrl) {
         SPAN(
           B(email), " - is not a member of ", domains.getRequestDomainRecord().orgName, ".", BR(), BR(),
           A({href:reAuthURL}, "Sign in with another google account"), BR(), BR(),
+          "Or ", A({href:  _requestToJoinUrl(uid)}, "request to join")));
+
+      response.redirect(tryAgainUrl);
+    }
+
+  } else if (!u.lastLoginDate) {
+    // there is an account for them and this is the first time they're logging in!
+    var uid = pro_accounts.upgradeSignupToAccount(email, fullName, null);
+    u = pro_accounts.getAccountById(uid);
+    if (!u) { throw Error("Failed to upgrade pro account"); }
+  }
+
+  pro_accounts.signInSession(u);
+  pro_accounts.updateCookieSignedInAcctsOnSignIn();
+
+  pro_account_auto_signin.setAutoSigninCookie(true);
+  pro_account_auto_signin.setGoogleAutoSigninCookie(true);
+
+  return u;
+}
+
+// Once the oAuth2 flow is completed, we proceed here
+function completeServiceSignIn(email, fullName, tryAgainUrl) {
+  // Provision for mixed case emails
+  email = email.toLowerCase();
+
+  var u = pro_accounts.getAccountByEmail(email);
+
+  // There is not currently an account for this user in this domain
+  if (!u) {
+    // We'll create one if we're allowed to
+    if (pro_accounts.allowRegistration(email, request.params['inviteToken'])) {
+      var domainId = domains.getRequestDomainId();
+      var uid = pro_accounts.createNewAccount(domainId, fullName, email,
+        null/*password*/, false/*isAdmin*/, true/*skipValidation*/, null/*fbid*/);
+      u = pro_accounts.getAccountById(uid);
+      if (!u) { throw Error("Failed to create account"); }
+
+      // Failing that - tell them we can't find an account for them and offer
+      // that they can sign in with a different account
+    } else {
+      var reAuthURL = sso_account.serviceOAuth2URLForLogin();
+
+      // Let's make them a mainsite account so we can refer to them
+      var acct = pro_accounts.ensureMainSiteAccount(email);
+      if (!acct) {
+        var u = pro_accounts.getAccountByEmail(email, domains.getPrimaryDomainId());
+        if (u && !u.lastLoginDate) {
+          log.warn("This should never happen.");
+          uid = u.id;
+        } else {
+          uid = pro_accounts.createNewAccount(domains.getPrimaryDomainId(), fullName,
+            email, null/*password*/, false/*isAdmin*/, true/*skipValidation*/, null/*fbid*/);
+        }
+      } else {
+        uid = acct.id;
+      }
+
+      setSigninNotice(
+        SPAN(
+          B(email), " - is not a member of ", domains.getRequestDomainRecord().orgName, ".", BR(), BR(),
+          A({href:reAuthURL}, "Sign in with another account please"), BR(), BR(),
           "Or ", A({href:  _requestToJoinUrl(uid)}, "request to join")));
 
       response.redirect(tryAgainUrl);

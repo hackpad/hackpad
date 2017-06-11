@@ -30,7 +30,14 @@ import("etherpad.control.pro.admin.account_manager_control");
 
 import("etherpad.helpers");
 
+function redirectToHome() {
+    if (! helpers.allowWorkspaceCreation() == true) {
+        response.redirect('/');
+    }
+}
+
 function render_main_get() {
+  redirectToHome();
   pro_accounts.requireAccount("Sign in to create a new Hackpad Space.");
 
   var newSiteData = getSession().newSiteData || {};
@@ -45,6 +52,7 @@ function render_main_get() {
 
 // Step 1 form post via AJAX
 function render_step1Post_post() {
+  redirectToHome();
   var siteName = request.params.name;
   var shortName = request.params.shortname;
   var permission = request.params.permission;
@@ -55,10 +63,10 @@ function render_step1Post_post() {
   // set default email message for mailing lists
   if (!newSiteData.defaultWelcomeEmailSubject) {
     newSiteData.defaultWelcomeEmailSubject = getSessionProAccount().fullName;
-    newSiteData.defaultWelcomeEmailSubject += " invited you to " + newSiteData.shortName + ".hackpad.com";
+    newSiteData.defaultWelcomeEmailSubject += " invited you to " + newSiteData.shortName + "." + appjet.config['etherpad.canonicalDomain'];
   }
   if (!newSiteData.defaultWelcomeEmailBody) {
-    newSiteData.defaultWelcomeEmailBody = "Come and hack with me: https://" + newSiteData.shortName + ".hackpad.com/\n\n";
+    newSiteData.defaultWelcomeEmailBody = "Come and hack with me: https://" + newSiteData.shortName + "." + appjet.config['etherpad.canonicalDomain'] + "/\n\n";
     newSiteData.defaultWelcomeEmailBody += "Hackpad is a collaborative editing tool that allows us all to work on the same document together in real time.\n\n";
     newSiteData.defaultWelcomeEmailBody += "You can create new documents, and they will be automatically shared with members of the site."
   }
@@ -78,6 +86,7 @@ function render_step1Post_post() {
 
 // Step 2 form post via AJAX
 function render_step2Post_post() {
+  redirectToHome();
   var allowAllFromDomain = request.params.allowAllFromDomain;
   var emailInvites = request.params["emailInvites[]"];
   var notificationAddress = request.params.notificationAddress;

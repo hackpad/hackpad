@@ -25,7 +25,7 @@
 
           // 3rd party cookies workaround
           if (args[0] == "hackpad" && args[1] == "getcookie") {
-            // go to hackpad.com to establish a cookie, then come back here
+            // go to the canonicalDomain to establish a cookie, then come back here
             var contURL = decodeURIComponent(args[2]);
             document.location = contURL + "&contUrl=" + encodeURIComponent(document.location);
           }

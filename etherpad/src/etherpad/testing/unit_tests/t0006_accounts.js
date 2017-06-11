@@ -22,8 +22,8 @@ function run() {
   // Configuration
   var testPublicDomain = "unittestpublic" + stringutils.randomString(10).toLowerCase();
   var testPrivateDomain = "unittestprivate" + stringutils.randomString(10).toLowerCase();
-  var testEmailAddy = "noreply+" + stringutils.randomString(10).toLowerCase() + "@hackpad.com";
-  var testBogusEmailAddy = "noreply+" + stringutils.randomString(10).toLowerCase() + "@hackpad.com";
+  var testEmailAddy = "noreply+" + stringutils.randomString(10).toLowerCase() + "@" + appjet.config['etherpad.canonicalDomain'];
+  var testBogusEmailAddy = "noreply+" + stringutils.randomString(10).toLowerCase() + "@" + appjet.config['etherpad.canonicalDomain'];
 
   var testPublicDomainId = domains.createNewSubdomain(testPublicDomain, testPublicDomain);
   var testPrivateDomainId = domains.createNewSubdomain(testPrivateDomain, testPrivateDomain);

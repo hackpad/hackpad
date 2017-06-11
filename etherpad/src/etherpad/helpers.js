@@ -32,6 +32,7 @@ import("etherpad.pro.pro_config");
 import("etherpad.pro.pro_accounts");
 import("etherpad.pro.pro_accounts.getSessionProAccount");
 import("etherpad.sessions");
+import("etherpad.log");
 
 //----------------------------------------------------------------
 // array that supports contains() in O(1)
@@ -258,6 +259,14 @@ function jsIncludes() {
   }
 }
 
+function getOauthImage() {
+  if (appjet.config.customOAuthClientImage == '__custom_oauth_client_image__') {
+    return 'no-image.png'
+  } else {
+    return appjet.config.customOAuthClientImage
+  }
+}
+
 function setNoJs(val) {
   _hd().noJs = val;
 }
@@ -462,7 +471,7 @@ function facebookOpenGraphMetadata(pageArgs) {
 
   addToHead('<meta property="og:title" content="' + escapeHtml(args.title) + '" />');
   addToHead('<meta property="og:description" content="' + escapeHtml(args.description) + '" />');
-  addToHead('<meta property="og:image" content="https://hackpad.com/static/img/hackpad-logo.png" />');
+  addToHead('<meta property="og:image" content="https://' + appjet.config['etherpad.canonicalDomain'] + '/static/img/hackpad-logo.png" />');
   addToHead('<meta property="fb:app_id" content="' + appjet.config.facebookClientId + '" />');
   addToHead('<meta property="og:url" content="' + request.scheme+'://'+request.host+request.path+ '" />');
   addToHead('<meta property="og:type" content="' + args.type + '" />');
@@ -471,7 +480,7 @@ function facebookOpenGraphMetadata(pageArgs) {
 }
 
 function addDefaultMetadata() {
-  addToHead("<meta content='hackpad.com' name='title' />");
+  addToHead("<meta content='" + appjet.config['etherpad.canonicalDomain'] +"' name='title' />");
   addToHead("<meta content='Real-time collaborative wiki' name='description' />");
   addToHead("<link href='/static/img/hackpad-logo.png' rel='image_src' />");
 }
@@ -501,8 +510,40 @@ function allowGoogleSignin() {
   }
 }
 
+function allowWorkspaceCreation() {
+    if (appjet.config.disableWorkspaceCreation == "true") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function allowCustomServiceSignin() {
+  if (appjet.config.enableCustomOauthServiceSignin == "true") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function allowNormalLogin() {
+    if (appjet.config.enableNormalLogin == "false") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function supportEmailAddress() {
   return appjet.config.supportEmailAddress;
+}
+
+function useHttpsUrls() {
+  return appjet.config.useHttpsUrls;
+}
+
+function canonicalDomain() {
+  return appjet.config['etherpad.canonicalDomain'];
 }
 
 
@@ -555,8 +596,10 @@ function cdn() {
   if (isProduction()) {
     if (appjet.config['etherpad.fakeProduction'] == "true") { return ""; }
 
-    if (appjet.config['etherpad.cdnUrl']) {
-      return appjet.config['etherpad.cdnUrl'];
+    if (appjet.config.cdnUrl != '__cdn_url__' && (typeof appjet.config.cdnUrl != 'undefined'))   {
+      return appjet.config.cdnUrl;
+    } else {
+      return "";
     }
   } else {
     return "";
@@ -634,8 +677,8 @@ function _getCSPPolicy() {
       "https://gist.github.com/"
     ],
     "frame-ancestors": [SELF],
-    "report-uri": ["https://hackpad.com/csp_log"],
-    "referrer": ["origin-when-crossorigin"]
+    "report-uri": ["https://"+ appjet.config['etherpad.canonicalDomain'] +"/csp_log"]
+    //"referrer": ["origin-when-crossorigin"]
   };
 
   if (cdn()) {

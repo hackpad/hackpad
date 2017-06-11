@@ -451,7 +451,7 @@ function render_search_get() {
   renderFramedHtml(_renderSearchResultsPage('pro/pro_search.ejs'));
   return true;
 }
-//render_main_get = render_search_get;
+render_main_get = render_search_get;
 
 function render_search_live_get() {
   response.write(_renderSearchResultsPage('pro/pro_search_live.ejs'));

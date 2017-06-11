@@ -370,7 +370,9 @@ function _getDomainIdFromRecipientAddress(msg) {
   for (var i=0; i<recipients.length; i++) {
     var recipientAddress = recipients[i].getAddress();
 
-    var m = recipientAddress.match(/(\w+)\+(\w+)@hackpad\.com/);
+    var mainDomain = appjet['etherpad.canonicalDomain'].replace(".", "\\.");
+    var  re = new RegExp("(\w+)\+(\w+)@"+mainDomain, 'g');
+    var m = recipientAddress.match(re);
     if (m && m[2]) {
       var domain = domains.getDomainRecordFromSubdomain(m[2]);
 
@@ -389,8 +391,11 @@ function _getMessageContext(msg) {
   var domainId = 1;
 
   for (var i in referencesIds) {
-    // pad+revnum@subdomain.hackpad.com
-    var m = referencesIds[i].match(/<(\w+)\+(\w+)@((\w+)\.)?hackpad\.com>/);
+    // pad+revnum@subdomain.canonicalDomain
+    log.info(net.appjet.config['etherpad.canonicalDomain']);
+    var mainDomain = appjet['etherpad.canonicalDomain'].replace(".", "\\.");
+    var re = new RegExp("<(\w+)\+(\w+)@((\w+)\.)?"+mainDomain, 'gi');
+    var m = referencesIds[i].match(re);
     if (m) {
       if (m[4]) {
         var domain = domains.getDomainRecordFromSubdomain(m[4]);

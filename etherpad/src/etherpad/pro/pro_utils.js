@@ -122,8 +122,7 @@ function renderFramedMessage(m) {
 }
 
 function getFullProDomain() {
-  // TODO: have a special config param for this? --etherpad.canonicalDomain
-  return request.domain;
+  return appjet.config['etherpad.canonicalDomain'];
 }
 
 // domain, including port if necessary

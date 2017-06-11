@@ -387,7 +387,7 @@ var padchat = (function(){
             attr('title', clientVars.siteName).
             attr('data-room', 'site').
             append($('<img>').
-                attr('src', 'https://hackpad.com/static/favicon.ico')).
+                attr('src', '/static/favicon.png')).
             append($('<span>').text(clientVars.siteName))
       );
 

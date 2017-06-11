@@ -29,8 +29,6 @@
   <% } %>
 <% return ejs_data; }); %>
 
-
-
 <% template.define('app-login-form', function() { var ejs_data=''; %>
   <%- template.use('connect-buttons',null ,"signin"); %>
 
@@ -113,42 +111,50 @@
         </a>
       <% } %>
 
-      <% if (helpers.allowFacebookSignin() || helpers.allowGoogleSignin()) { %>
+      <% if (helpers.allowCustomServiceSignin()) { %>
+        <a id="login-stek" href="<%=serviceSignInUrl%>" class="stek-login-required" target="<%= typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self' %>">
+          <img class="fb-connect-button" src="<%=helpers.getOauthImage()%>">
+        </a>
+      <% } %>
+
+      <% if ((helpers.allowFacebookSignin() || helpers.allowGoogleSignin() || helpers.allowCustomServiceSignin()) && helpers.allowNormalLogin()) { %>
         <span id="login-or"><span class="page-login-or"></span><span class="page-login-or-lbl">or</span><span class="page-login-or"></span></span>
       <% } %>
 
-      <form id="login-form" method="post" action="/ep/account/signin">
-        <%- helpers.xsrfTokenElement() %>
-        <span id="login-email-wrapper" class="login-email-input">
-          <label for="login-email"><i class="icon-privacy-invite"></i></label>
-          <input id="login-email" name="email" type="email" placeholder="Email" autocorrect="off" autocapitalize="off">
-          <%- template.use('button', null, { id: 'login-email-go', label: 'Go' }); %>
-        </span>
-
-        <div id="login-email-secondary">
-          <i class="icon-back"></i>
-          <span id="login-password-wrapper" class="login-email-input">
-            <label for="login-password"><i class="icon-lock"></i></label>
-            <input id="login-password" name="password" type="password" placeholder="Password">
+      <% if (helpers.allowNormalLogin()) { %>
+        <form id="login-form" method="post" action="/ep/account/signin">
+          <%- helpers.xsrfTokenElement() %>
+          <span id="login-email-wrapper" class="login-email-input">
+            <label for="login-email"><i class="icon-privacy-invite"></i></label>
+            <input id="login-email" name="email" type="email" placeholder="Email" autocorrect="off" autocapitalize="off">
+            <%- template.use('button', null, { id: 'login-email-go', label: 'Go' }); %>
           </span>
-          <a href="/ep/account/forgot-password" id="login-forgot-password">Forgot password?</a>
 
-          <input id="signin-remember-me" type="hidden" group="1" name="rememberMe" value="1">
-          <input type="hidden" name="cont" value="<% if (typeof(cont) != 'undefined') { %><%=cont%><% } else { %><%=request.url%><% } %>">
-          <% if (typeof(inviteToken) != 'undefined') { %>
-            <input type="hidden" name="inviteToken" value="<%=inviteToken%>">
-          <% } %>
-
-          <div id="login-email-tertiary" class="modal-more-info">
-            <span id="login-full-name-wrapper" class="login-email-input">
-              <label for="login-fullname"><i class="icon-user"></i></label>
-              <input id="login-fullname" name="name" placeholder="Full Name">
+          <div id="login-email-secondary">
+            <i class="icon-back"></i>
+            <span id="login-password-wrapper" class="login-email-input">
+              <label for="login-password"><i class="icon-lock"></i></label>
+              <input id="login-password" name="password" type="password" placeholder="Password">
             </span>
-          </div>
+            <a href="/ep/account/forgot-password" id="login-forgot-password">Forgot password?</a>
 
-          <button id="login-submit" type="submit" disabled>Start using Hackpad</button>
-        </div>
-      </form>
+            <input id="signin-remember-me" type="hidden" group="1" name="rememberMe" value="1">
+            <input type="hidden" name="cont" value="<% if (typeof(cont) != 'undefined') { %><%=cont%><% } else { %><%=request.url%><% } %>">
+            <% if (typeof(inviteToken) != 'undefined') { %>
+              <input type="hidden" name="inviteToken" value="<%=inviteToken%>">
+            <% } %>
+
+            <div id="login-email-tertiary" class="modal-more-info">
+              <span id="login-full-name-wrapper" class="login-email-input">
+                <label for="login-fullname"><i class="icon-user"></i></label>
+                <input id="login-fullname" name="name" placeholder="Full Name">
+              </span>
+            </div>
+
+            <button id="login-submit" type="submit" disabled>Start using Hackpad</button>
+          </div>
+        </form>
+      <% } %>
     </div>
     <div class="clear"></div>
   </div>
