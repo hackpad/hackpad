@@ -51,6 +51,8 @@ Getting it running
         CUSTOM_OAUTH_CLIENT_NAME - The name of the service with which the user will authenticate
         CUSTOM_OAUTH_CLIENT_IMAGE - The image of the auth service to show in the login popup. This image can be a URL, you can also upload an image to the folder etherpad/src/static/img/ and use this path along with the uploaded image name  (e.g. value "/static/img/company-logo.png")
         GOOGLE_ANALYTICS_ID - Add it to keep track of analytics data
+        DROPBOX_KEY - Dropbox app key (to be used for user pad syncing)
+        DROPBOX_SECRET - Dropbox app secret (to be used for user pad syncing)
         DISABLE_DROPBOX_SYNC - Weather to disable or not the dropbox sync task (defaults to false, i.e. keep the sync enabled)
         ENABLE_FORM_LOGIN - Enable or disable normal form login/registration
         AWS_KEY_ID - Your AWS Access Key ID
