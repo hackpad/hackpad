@@ -45,7 +45,7 @@ INSTALLING ON POSIX COMPATIBLE SYSTEMS
   * Visit http://localhost:9000/ep/account/validate-email?email=YOUR_EMAIL&token=TOKEN
   * Hurrah, you now have an account!
 
-* If you want emoji support go to https://github.com/github/gemoji/tree/master/images/emoji/unicode
+* If you want emoji support go to https://github.com/github/gemoji/tree/choose-set/images/emoji/unicode
   and copy the images into etherpad/src/static/img/emoji/unicode/
   
 IMAGE UPLOAD FUNCTIONALITY

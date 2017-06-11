@@ -387,7 +387,7 @@ var padchat = (function(){
             attr('title', clientVars.siteName).
             attr('data-room', 'site').
             append($('<img>').
-                attr('src', 'https://<%=appjet.config["etherpad.canonicalDomain"] %>/static/favicon.ico')).
+                attr('src', '/static/favicon.png')).
             append($('<span>').text(clientVars.siteName))
       );
 
