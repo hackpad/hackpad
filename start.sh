@@ -88,6 +88,7 @@ sed -i.bak s/__dropbox_app_key__/$DROPBOX_KEY/g hackpad/etherpad/etc/etherpad.lo
 sed -i.bak s/__dropbox_app_secret__/$DROPBOX_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__disable_dropbox_sync__/$DISABLE_DROPBOX_SYNC/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__disable_creating_workspaces__/$DISABLE_WORKSPACE_CREATION/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak "s/^\(etherpad\.imgDefaultDomain = \).*$/\1$CANONICAL_DOMAIN/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(topdomains = \).*$/\1$TOP_DOMAINS/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(useHttpsUrls = \).*$/\1$USE_HTTPS_URLS/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(devMode = \).*$/\1$DEV_MODE/g" hackpad/etherpad/etc/etherpad.local.properties
