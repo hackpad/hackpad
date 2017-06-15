@@ -84,7 +84,7 @@ sed -i.bak s/__aws_attachments_bucket__/$S3_BUCKET/g hackpad/etherpad/etc/etherp
 sed -i.bak s/__aws_region__/$S3_REGION/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__canonical_domain__/$CANONICAL_DOMAIN/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__google_analytics_account__/$GOOGLE_ANALYTICS_ID/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__dropbox_app_key__/$DROPBOX_KEY /g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__dropbox_app_key__/$DROPBOX_KEY/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dropbox_app_secret__/$DROPBOX_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__disable_dropbox_sync__/$DISABLE_DROPBOX_SYNC/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__disable_creating_workspaces__/$DISABLE_WORKSPACE_CREATION/g hackpad/etherpad/etc/etherpad.local.properties
