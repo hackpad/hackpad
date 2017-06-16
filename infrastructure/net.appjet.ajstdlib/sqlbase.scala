@@ -48,6 +48,7 @@ class SQLBase(driverClass: String, url: String, userName: String, password: Stri
     if (requireSSL) {
       jdbcUrl += "&useSSL=true&requireSSL=true";
     }
+    jdbcUrl += "&autoReconnect=true";
   }
   cpds.setJdbcUrl(jdbcUrl);
 
