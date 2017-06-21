@@ -79,7 +79,8 @@ function handleLoginCallback() {
       saveAuthorization(authorization, signedInAccount.id);
       sessions.getSession().isOauthServiceConnected = true;
 
-      var url = request.scheme + '://' + subDomain + helpers.canonicalDomain();
+      var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+      var url = theScheme + '://' + subDomain + helpers.canonicalDomain();
       response.redirect(url);
 
     }
