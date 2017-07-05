@@ -266,7 +266,20 @@ function render_sign_in_get() {
   pro_account_auto_signin.checkAutoSignin(cont, true/*skipUniversal*/);
 
   var domainRecord = domains.getRequestDomainRecord();
-
+  
+  var subDomain = request.host.replace('.' + helpers.canonicalDomain(), '');
+  if (request.host == helpers.canonicalDomain()) {
+    subDomain = '';
+  }
+  response.setCookie({
+    name: 'SUBDOMAIN_OAUTH',
+    value: subDomain,
+    path: "/",
+    domain: '.' + helpers.canonicalDomain(),
+    secure: appjet.config.useHttpsUrls,
+    httpOnly: true
+  });
+  
   helpers.addClientVars({ facebookClientId: appjet.config.facebookClientId });
   var data = {cont:cont,
       email:contParams.email?contParams.email:"",

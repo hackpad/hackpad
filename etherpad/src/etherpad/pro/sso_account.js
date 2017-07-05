@@ -40,6 +40,8 @@ var CLIENT_DETAILS;
 function handleLoginCallback() {
   var userInfo;
 
+  var subDomain = request.cookies['SUBDOMAIN_OAUTH'] ? request.cookies['SUBDOMAIN_OAUTH'] + '.' : '';
+  
   // Clear the nonce
   deleteOAuthSessionVars();
 
@@ -77,7 +79,9 @@ function handleLoginCallback() {
       saveAuthorization(authorization, signedInAccount.id);
       sessions.getSession().isOauthServiceConnected = true;
 
-      response.redirect("/");
+      var theScheme = appjet.config.useHttpsUrls ? 'https' : (request.headers['X-Forwarded-Proto']  ? request.headers['X-Forwarded-Proto'] : request.scheme);
+      var url = theScheme + '://' + subDomain + helpers.canonicalDomain();
+      response.redirect(url);
 
     }
   }
@@ -109,6 +113,25 @@ function serviceOAuth2URLForLogin(optIdentity) {
 }
 
 function serviceOAuth2URL(scopes, optIdentity, optState) {
+
+  var subDomain = request.host.replace('.' + helpers.canonicalDomain(), '');
+  if (request.host == helpers.canonicalDomain()) {
+    subDomain = '';
+  }
+
+  if (!subDomain) { // on home page
+    // Do something @@@@@@@@@@@@@@@@
+  } else {
+    response.setCookie({
+      name: 'SUBDOMAIN_OAUTH',
+      value: subDomain,
+      path: "/",
+      domain: sessions.getScopedDomain(),
+      secure: appjet.config.useHttpsUrls,
+      httpOnly: true /* disallow client js access */
+    });
+  }
+  
   scopes = scopes || DEFAULT_SCOPES;
   var params = {
     client_id: clientId(),
