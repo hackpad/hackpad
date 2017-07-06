@@ -90,6 +90,9 @@ function render_main_get() {
     experiment:'homepage-v'+homepageVersion
   });
 
+  if(appjet.config['REDIRECT_HOME_TO'] != false) {
+      response.redirect(appjet.config['REDIRECT_HOME_TO']);
+  }
   renderHtml('main/home.ejs', {
     publicPads: publicPads,
     googleSignInUrl: google_account.googleOAuth2URLForLogin(),

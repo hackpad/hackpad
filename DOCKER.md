@@ -67,6 +67,7 @@ Getting it running
         PROCESS_INBOX - Set to true or false (defaults to false)
         SECURE_COOKIE_KEY - Secure cookie key
         REQUEST_SIGNIN_SECRET - Request signin secret key
+        REDIRECT_HOME_TO = Change the home page by adding a valid absolute path in this variable
         
         
         Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker run' command, e.x. "-e DB_HOST=localhost -e DB_PORT=3306" etc. 
