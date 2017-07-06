@@ -982,15 +982,15 @@ function render_google_sign_in_get() {
 
 // Google oAuth2 callback
 // URL is fixed to avoid breaking the iOS app
-/*function render_openid_get() {
+function render_openid_get() {
   return google_account.handleLoginCallback();
-}*/
+}
 
 // Google oAuth2 callback
 // URL is fixed to avoid breaking the iOS app
-function render_openid_get() {
+/*function render_openid_get() {
   return sso_account.handleLoginCallback();
-}
+}*/
 
  // Once Google oAuth2 flow is completed, we proceed here
 function completeGoogleSignIn(email, fullName, tryAgainUrl) {
