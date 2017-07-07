@@ -41,6 +41,7 @@ Getting it running
         FB_ID - Facebook OAuth id
         FB_SECRET - Facebook OAuth secret key
         CUSTOM_EMAIL_ADDRESS - This needs to be a valid, resolvable, address, ex. noreply@mycompany.com
+        SUPPORT_EMAIL_ADDRESS - Support email, your team client support email address
         SMTP_SERVER - The smtp server host (needs the PORT as well), ex. smtp.my.host:587
         SMTP_USER - SMTP username
         SMTP_PASS - SMTP password
