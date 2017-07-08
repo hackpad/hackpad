@@ -260,7 +260,7 @@ $(document).ready(function(){
             'width': '100%',
             'top': 0
           });
-          $('#login-google, #login-facebook, #login-or').fadeIn();
+          $('#login-google, #login-facebook, #login-or, #login-stek').fadeIn();
           if ($('#login-email').val()) {
             $('#login-email-go').fadeIn();
           }
