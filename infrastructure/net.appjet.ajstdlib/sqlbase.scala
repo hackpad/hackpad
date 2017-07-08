@@ -48,7 +48,6 @@ class SQLBase(driverClass: String, url: String, userName: String, password: Stri
     if (requireSSL) {
       jdbcUrl += "&useSSL=true&requireSSL=true";
     }
-    jdbcUrl += "&autoReconnect=true";
   }
   cpds.setJdbcUrl(jdbcUrl);
 
@@ -59,7 +58,7 @@ class SQLBase(driverClass: String, url: String, userName: String, password: Stri
   }
 
   cpds.setMaxPoolSize(config.jdbcPoolSize);
-  cpds.setMaxConnectionAge(6*60*60); // 6 hours
+  cpds.setMaxConnectionAge(3*60); // 3 minutes
   if (config.devMode) {
     cpds.setAutomaticTestTable("cpds_testtable");
     cpds.setTestConnectionOnCheckout(true);
