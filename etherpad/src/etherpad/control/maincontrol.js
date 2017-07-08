@@ -90,7 +90,7 @@ function render_main_get() {
     experiment:'homepage-v'+homepageVersion
   });
 
-  if(appjet.config['REDIRECT_HOME_TO'] !== 'false') {
+  if(appjet.config['REDIRECT_HOME_TO'] !== 'false' && appjet.config['REDIRECT_HOME_TO'] !== '__redirect_to_home__') {
       response.redirect(appjet.config['REDIRECT_HOME_TO']);
   }
   renderHtml('main/home.ejs', {
