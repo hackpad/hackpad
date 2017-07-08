@@ -37,6 +37,7 @@ function _getDefaultConfig() {
     allowGoogleSignin: false,
     allowWorkspaceCreation: true,
     allowCustomServiceSignin: false,
+    getOAuthClientName: "SSO Login",
     allowNormalLogin: true,
     publicDomain: false,
     defaultGuestPolicy: "domain",

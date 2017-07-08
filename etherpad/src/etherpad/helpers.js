@@ -526,6 +526,10 @@ function allowCustomServiceSignin() {
   }
 }
 
+function getOAuthClientName() {
+  return appjet.config.customOAuthClientName;
+}
+
 function allowNormalLogin() {
     if (appjet.config.enableNormalLogin == "false") {
         return false;
