@@ -28,8 +28,7 @@ jimport("java.util.concurrent.ConcurrentHashMap");
 // The default set of permissions to ask the user for.
 var DEFAULT_SCOPES = [
   "email",
-  "profile",
-  "https://www.googleapis.com/auth/contacts.readonly",
+  "profile"
 ];
 
 var CLIENT_DETAILS;
@@ -300,7 +299,12 @@ serverhandlers.tasks.loadContacts = function(account) {
 serverhandlers.tasks.loadPhoto = function(account, imageUrl) {
   var photo = netutils.urlGet(imageUrl);
   if (photo) {
-    s3.put("hackpad-profile-photos", account.email, photo.content, true, photo.contentType);
+    if (appjet.config.s3BucketAvatarsFolder != false) {
+      var bucketFolder = appjet.config.s3BucketAvatarsFolder;
+    } else {
+        var bucketFolder = '';
+    }
+    s3.put("s3Bucket", bucketFolder+account.email, photo.content, true, photo.contentType);
     pro_accounts.setAccountHasPhotoByEmail(account.id);
   }
 }

@@ -159,7 +159,13 @@ function render_update_profile_photo_post() {
   var u = pro_accounts.getSessionProAccount();
   var upload = utils.getMultipartUpload();
   if (upload.length) {
-    s3.put("hackpad-profile-photos", u.email, upload[0].file, true, upload[0].type);
+    if (appjet.config.s3BucketAvatarsFolder != false) {
+        var bucketFolder = appjet.config.s3BucketAvatarsFolder;
+    } else {
+        var bucketFolder = '';
+    }
+
+    s3.put("stekpad-prod", bucketFolder+u.email, upload[0].file, true, upload[0].type);
   }
 
   pro_accounts.setAccountHasPhotoByEmail(u.id);

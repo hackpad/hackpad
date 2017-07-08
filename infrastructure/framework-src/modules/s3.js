@@ -18,8 +18,8 @@ function _init() {
 }
 
 function getBucketName(bucketName) {
-  if (appjet.config["s3." + bucketName]) {
-    return appjet.config["s3." + bucketName];
+  if (appjet.config[bucketName]) {
+    return appjet.config[bucketName];
   }
   return bucketName;
 }
@@ -49,7 +49,7 @@ function put(bucketName, keyName, bytes, isPublicRead, contentType) {
 }
 
 function getURL(bucketName, keyName, useHTTP) {
-  return (useHTTP?"http":"https") + "://s3.amazonaws.com/" + getBucketName(bucketName) + "/" + keyName;
+  return (useHTTP?"http":"https") + "://"+appjet.config.awsDomain+"/" + getBucketName(bucketName) + "/" + keyName;
 }
 
 function getPresignedURL(bucketName, keyName, durationValidMs) {
