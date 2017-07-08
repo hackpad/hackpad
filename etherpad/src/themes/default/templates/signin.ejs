@@ -112,8 +112,9 @@
       <% } %>
 
       <% if (helpers.allowCustomServiceSignin()) { %>
-        <a id="login-stek" href="<%=serviceSignInUrl%>" class="stek-login-required" target="<%= typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self' %>">
+        <a id="login-stek" class="stek-login-required" href="<%=serviceSignInUrl%>" target="<%= typeof(googleButtonTarget) != 'undefined' ? googleButtonTarget : '_self' %>" style="background: #F5B500;">
           <img class="fb-connect-button" src="<%=helpers.getOauthImage()%>">
+          <span>Sign in with <strong>Stek.io</strong></span>
         </a>
       <% } %>
 
