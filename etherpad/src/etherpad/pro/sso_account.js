@@ -261,13 +261,14 @@ function _getCache(cacheName) {
   }
 }
 
-serverhandlers.tasks.loadPhoto = function(account, imageUrl) {
+/*serverhandlers.tasks.loadPhoto = function(account, imageUrl) {
   var photo = netutils.urlGet(imageUrl);
+  log.custom("sso-oauth2", photo);
   if (photo) {
-    s3.put("hackpad-profile-photos", account.email, photo.content, true, photo.contentType);
+    s3.put("stekpad", account.email, photo.content, true, photo.contentType);
     pro_accounts.setAccountHasPhotoByEmail(account.id);
   }
-}
+}*/
 
 function onStartup() {
 }
