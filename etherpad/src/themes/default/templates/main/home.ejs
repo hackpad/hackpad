@@ -81,36 +81,43 @@ limitations under the License. */ %>
   </div>
   <div id="middle" class="iphonehide">
     <div id="customerlogos">
+    <% if (helpers.personalFooter()) { %>
+      <div id="used-by">
+        <%=helpers.personalFooter()%>
+      </div>
+    <% } else { %>
       <div id="used-by">Used &amp; loved by:</div>
-      <img src="<%=helpers.cdn()%>/static/img/marketing/logos/airbnb.png"/>
-      <img src="<%=helpers.cdn()%>/static/img/marketing/logos/stripe.png"/>
-      <img src="<%=helpers.cdn()%>/static/img/marketing/logos/upworthy.png"/>
-      <img src="<%=helpers.cdn()%>/static/img/marketing/logos/meteor.png"/>
-      <img src="<%=helpers.cdn()%>/static/img/marketing/logos/twitch.png"/>
-      <%- template.use('button', null, {
-        id: 'try-it',
-        className: 'iphonehide ipadhide',
-        onclick: "$('html,body').animate({scrollTop: $(this).offset().top - 50}, 1000);",
-        label: 'Take a test drive'
-      }); %>
-    </div>
+        <img src="<%=helpers.cdn()%>/static/img/marketing/logos/airbnb.png"/>
+        <img src="<%=helpers.cdn()%>/static/img/marketing/logos/stripe.png"/>
+        <img src="<%=helpers.cdn()%>/static/img/marketing/logos/upworthy.png"/>
+        <img src="<%=helpers.cdn()%>/static/img/marketing/logos/meteor.png"/>
+        <img src="<%=helpers.cdn()%>/static/img/marketing/logos/twitch.png"/>
+        <%- template.use('button', null, {
+          id: 'try-it',
+          className: 'iphonehide ipadhide',
+          onclick: "$('html,body').animate({scrollTop: $(this).offset().top - 50}, 1000);",
+          label: 'Take a test drive'
+        }); %>
+      </div>
+    <% } %>
   </div>
   <div id="blur" class="iphonehide"></div>
+  <% if (helpers.personalFooter()) { %>
+    <div id="features" class="ipadhide iphonehide">
+      <div class="featurebox ipadhide" style="max-width: 1770px; margin-left: -75px;">
+      </div>
 
-  <div id="features" class="ipadhide iphonehide">
-    <div class="featurebox ipadhide" style="max-width: 1770px; margin-left: -75px;">
+      <div id="home-pricing">
+        Free for personal use.<br>
+        <%- template.use('button', null, {
+          id: 'features-signup-button',
+          className: 'signin-button',
+          label: 'Sign up'
+        }); %>
+      </div>
+
     </div>
-
-    <div id="home-pricing">
-      Free for personal use.<br>
-      <%- template.use('button', null, {
-        id: 'features-signup-button',
-        className: 'signin-button',
-        label: 'Sign up'
-      }); %>
-    </div>
-
-  </div>
+  <% } %>
 </div>
 
 <script type="text/javascript" nonce="<%= helpers.cspNonce() %>">

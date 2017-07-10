@@ -32,6 +32,7 @@ import("etherpad.pro.pro_config");
 import("etherpad.pro.pro_accounts");
 import("etherpad.pro.pro_accounts.getSessionProAccount");
 import("etherpad.sessions");
+import("etherpad.importexport.toMarkdown.toMarkdown");
 import("etherpad.log");
 
 //----------------------------------------------------------------
@@ -528,6 +529,14 @@ function allowCustomServiceSignin() {
 
 function getOAuthClientName() {
   return appjet.config.customOAuthClientName;
+}
+
+function personalFooter() {
+    if (!appjet.config.personalizeFooter != 'false' && appjet.config.personalizeFooter != '__personalize_footer__') {
+      return appjet.config.personalizeFooter;
+    } else {
+      return false;
+    }
 }
 
 function allowNormalLogin() {

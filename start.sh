@@ -60,6 +60,7 @@ FEATURE_HELP_PAD_ID=$(escapeChars ${FEATURE_HELP_PAD_ID:-__feature_help_pad_id__
 SECURE_COOKIE_KEY=$(escapeChars ${SECURE_COOKIE_KEY:-__secure_cookie_key__})
 REQUEST_SIGNIN_SECRET=$(escapeChars ${REQUEST_SIGNIN_SECRET:-__request_signing_secret__})
 REDIRECT_HOME_TO=$(escapeChars ${REDIRECT_HOME_TO:-false})
+PERSONALIZE_FOOTER=$(escapeChars ${PERSONALIZE_FOOTER:-false})
 
 cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/etherpad.local.properties
 
@@ -108,6 +109,7 @@ sed -i.bak s/__process_inbox__/$PROCESS_INBOX/g hackpad/etherpad/etc/etherpad.lo
 sed -i.bak s/__img_default_domain__/$CANONICAL_DOMAIN/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__s3_bucket_avatars_folder__/$S3_BUCKET_AVATARS_FOLDER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__redirect_to_home__/$REDIRECT_HOME_TO/g hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__personalize_footer__/$PERSONALIZE_FOOTER/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__welcome_pad_source_id__/$WELCOME_PAD_SOURCE_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__feature_help_pad_id__/$FEATURE_HELP_PAD_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__secure_cookie_key__/$SECURE_COOKIE_KEY/g hackpad/etherpad/etc/etherpad.local.properties
