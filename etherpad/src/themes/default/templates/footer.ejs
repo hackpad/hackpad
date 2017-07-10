@@ -3,12 +3,7 @@
 %>
 
 <% template.define('footer', function() { var ejs_data=''; %>
-<footer id="pad-page-footer" class="hide-before-pad-load iphonehide">
-  &copy; Dropbox Inc.
-  <a href="https://<%= helpers.canonicalDomain() %>/83netTWokps#Hackpad-Terms-of-Service">Terms</a>
-  <a href="https://<%= helpers.canonicalDomain() %>/RpTWPko6ER2#Hackpad-Privacy-Policy">Privacy</a>
-  <a id="footer-support-link" href="mailto:<%=helpers.supportEmailAddress()%>">Support</a>
-  <a href="https://<%= helpers.canonicalDomain() %>/sIkGLftzN7c#About-Hackpad">About</a>
-  <a href="https://<%= helpers.canonicalDomain() %>/blog">Blog</a>
+<footer id="pad-page-footer" class="hide-before-pad-load">
+<%=helpers.personalFooter()%>
 </footer>
 <% return ejs_data; }); %>
