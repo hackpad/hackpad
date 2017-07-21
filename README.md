@@ -1,12 +1,14 @@
 # About Hackpad
 
-## Hackpad.com is closing down. Developers we need your help!
+## Hackpad.com has closed down. Developers we need your help!
 
-Hackpad.com is closing down, but fortunately Dropbox has open sourced the code. 
+Hackpad.com has closed down as of July 19th 2017, but fortunately Dropbox has open sourced the code. 
 
 There hasn't been any development on the original repository since 2015, which is why we picked it up at a new location.
 
 This repository is being developed actively, and we are in need of any type of contributor. Do you have Javascript or other relevant skills, please contact us at opensource@stek.io so you can join the team. Or simply issue a Pull request.
+
+**Please note that this project is not affiliated with Dropbox in any way.  We simply are building from the Hackpad code that Dropbox open sourced.**
 
 ------
 
