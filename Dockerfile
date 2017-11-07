@@ -11,7 +11,7 @@ RUN chown hackpad:hackpad /home/hackpad
 
 WORKDIR /home/hackpad
 
-RUN mkdir -p lib/ data/logs/ hackpad/etherpad/
+RUN mkdir -p lib/ hackpad/etherpad/
 
 RUN wget https://cdn.mysql.com/archives/mysql-connector-java-5.1/mysql-connector-java-5.1.34.tar.gz && \
     tar -xzvf mysql-connector-java-5.1.34.tar.gz && \
@@ -20,17 +20,17 @@ RUN wget https://cdn.mysql.com/archives/mysql-connector-java-5.1/mysql-connector
     rm -rf mysql-connector-java-5.1.34/
 
 # Copy and build infrastructure
-COPY infrastructure hackpad/infrastructure
-COPY bin/build.sh exports.sh hackpad/bin/
+COPY infrastructure infrastructure/
+COPY bin/build.sh exports.sh bin/
 
-RUN ./hackpad/bin/build.sh
+RUN bin/build.sh
 
 # Copy start and run scripts
-COPY bin/start.sh bin/run.sh hackpad/bin/
+COPY bin/start.sh bin/run.sh bin/
 
 # Copy etherpad JS
-COPY etherpad ./hackpad/etherpad
+COPY etherpad etherpad/
 
 EXPOSE 9000
 
-CMD '/home/hackpad/hackpad/bin/start.sh'
+CMD bin/start.sh
