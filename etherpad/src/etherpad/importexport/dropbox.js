@@ -42,6 +42,11 @@ function generateOauthData (key, secret) {
   }
 }
 
+function _dropboxEnabled() {
+  // Whether nor not Dropbox is enabeld altogether
+  return appjet.config.disableDropboxSync != "true";
+}
+
 function _handleApiErrors(result, userId, url) {
   if (result.status >= 400) {
     // reset their token
@@ -202,7 +207,7 @@ function _computeCheckPoint(accessiblePads) {
 function requestSyncForUser(userId) {
   var account = pro_accounts.getAccountById(userId);
 
-  if (pro_accounts.isDropboxSyncEnabled(account)) {
+  if (_dropboxEnabled() && pro_accounts.isDropboxSyncEnabled(account)) {
     var accountById = {};
     accountById[userId] = account;
     execution.scheduleTask("dropbox-sync", "syncUser", 0, [userId, accountById]);
@@ -217,7 +222,7 @@ function requestSyncForCurrentUser() {
 
   if (request.isDefined) {
     var account = getSessionProAccount();
-    if (account &&  pro_accounts.isDropboxSyncEnabled(account)) {
+    if (_dropboxEnabled() && account &&  pro_accounts.isDropboxSyncEnabled(account)) {
       var userId = getSessionProAccount().id;
       var accountById = {};
       accountById[userId] = account;
@@ -336,7 +341,7 @@ function _dropboxPathForPad(proPadRow, state) {
 
 function _syncUser(uid, accountById) {
   log.custom('dropbox', "syncing user:" + uid + " at domain " + accountById[uid].domainId);
-  if (!pro_accounts.isDropboxSyncEnabled(accountById[uid])) {
+  if (!(_dropboxEnabled() && pro_accounts.isDropboxSyncEnabled(accountById[uid]))) {
     return;
   }
 
@@ -488,7 +493,7 @@ serverhandlers.tasks.syncDropbox = function() {
 }
 
 function onStartup() {
-  if (appjet.config.disableDropboxSync != "true") {
+  if (_dropboxEnabled()) {
     execution.initTaskThreadPool("dropbox-sync", 1);
     var initialDelay = isProduction() ? 5*60*1000 : 5*1000;
     execution.scheduleTask('dropbox-sync', "syncDropbox", initialDelay, []);

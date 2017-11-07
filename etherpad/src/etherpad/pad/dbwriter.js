@@ -149,13 +149,12 @@ function taskWritePad(padId) {
       var t2 = profiler.rcb("write");
       writePadNow(pad);
       t2();
-
-      success = true;
+    }
+    catch (e) {
+      log.warn("DB WRITER FAILED TO WRITE PAD: "+padId);
+      log.logException(e);
     }
     finally {
-      if (! success) {
-        log.warn("DB WRITER FAILED TO WRITE PAD: "+padId);
-      }
       profiler.print();
     }
   }, "r", true);
