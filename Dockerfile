@@ -11,22 +11,23 @@ RUN chown hackpad:hackpad /home/hackpad
 
 WORKDIR /home/hackpad
 
-ADD . ./hackpad
-RUN rm -rf hackpad/.git
-ADD exports.sh hackpad/bin/exports.sh
+ENV MYSQL_CONNECTOR mysql-connector-java-5.1.34
+RUN mkdir -p lib/ && \
+    wget -q https://cdn.mysql.com/archives/mysql-connector-java-5.1/$MYSQL_CONNECTOR.tar.gz -O - | \
+    tar -C lib/ -xzvf - $MYSQL_CONNECTOR/$MYSQL_CONNECTOR-bin.jar --strip-components=1
 
-RUN mkdir -p lib/ data/logs/
-RUN wget https://cdn.mysql.com/archives/mysql-connector-java-5.1/mysql-connector-java-5.1.34.tar.gz && \
-    tar -xzvf mysql-connector-java-5.1.34.tar.gz && \
-    mv mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar lib/ && \
-    rm mysql-connector-java-5.1.34.tar.gz && \
-    rm -rf mysql-connector-java-5.1.34/
+# Copy and build infrastructure
+COPY infrastructure infrastructure/
+COPY bin/build.sh exports.sh bin/
 
-RUN ./hackpad/bin/build.sh
+RUN mkdir -p etherpad/ && bin/build.sh
 
-ADD start.sh start.sh
-RUN chmod +x start.sh
+# Copy start and run scripts
+COPY bin/start.sh bin/run.sh bin/
+
+# Copy etherpad JS
+COPY etherpad etherpad/
 
 EXPOSE 9000
 
-CMD '/home/hackpad/start.sh'
+CMD bin/start.sh
