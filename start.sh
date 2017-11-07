@@ -61,6 +61,7 @@ SECURE_COOKIE_KEY=$(escapeChars ${SECURE_COOKIE_KEY:-__secure_cookie_key__})
 REQUEST_SIGNIN_SECRET=$(escapeChars ${REQUEST_SIGNIN_SECRET:-__request_signing_secret__})
 REDIRECT_HOME_TO=$(escapeChars ${REDIRECT_HOME_TO:-false})
 PERSONALIZE_FOOTER=$(escapeChars ${PERSONALIZE_FOOTER:-false})
+VERBOSE=$(escapeChars ${VERBOSE:-true})
 
 cp hackpad/etherpad/etc/etherpad.local.properties.tmpl hackpad/etherpad/etc/etherpad.local.properties
 
@@ -98,12 +99,10 @@ sed -i.bak s/__aws_secret__/$AWS_SECRET/g hackpad/etherpad/etc/etherpad.local.pr
 sed -i.bak s/__aws_attachments_bucket__/$S3_BUCKET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__aws_region__/$S3_REGION/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__canonical_domain__/$CANONICAL_DOMAIN/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__google_analytics_account__/$GOOGLE_ANALYTICS_ID/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dropbox_app_key__/$DROPBOX_KEY/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dropbox_app_secret__/$DROPBOX_SECRET/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__disable_dropbox_sync__/$DISABLE_DROPBOX_SYNC/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__disable_creating_workspaces__/$DISABLE_WORKSPACE_CREATION/g hackpad/etherpad/etc/etherpad.local.properties
-sed -i.bak s/__mixpanel_token__/$MIXPANEL_TOKEN/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__dbc_parameters__/$DB_PARAMETERS/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__process_inbox__/$PROCESS_INBOX/g hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak s/__img_default_domain__/$CANONICAL_DOMAIN/g hackpad/etherpad/etc/etherpad.local.properties
@@ -120,6 +119,29 @@ sed -i.bak "s/^\(useHttpsUrls = \).*$/\1$USE_HTTPS_URLS/g" hackpad/etherpad/etc/
 sed -i.bak "s/^\(devMode = \).*$/\1$DEV_MODE/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(etherpad\.isProduction = \).*$/\1$IS_PRODUCTION/g" hackpad/etherpad/etc/etherpad.local.properties
 sed -i.bak "s/^\(logDir = \).*$/\1.\/data\/logs/g" hackpad/etherpad/etc/etherpad.local.properties
-echo 'verbose = true' >> hackpad/etherpad/etc/etherpad.local.properties
+sed -i.bak s/__verbose__/$VERBOSE/g hackpad/etherpad/etc/etherpad.local.properties
+
+# Optional parameters; only add if true
+if [[ "$MIXPANEL_TOKEN" == "__mixpanel_token__" ]]; then
+    # Remove the line
+    sed -i.bak /__mixpanel_token__/d hackpad/etherpad/etc/etherpad.local.properties
+else
+    sed -i.bak s/__mixpanel_token__/$MIXPANEL_TOKEN/g hackpad/etherpad/etc/etherpad.local.properties
+fi
+
+if [[ "$GOOGLE_ANALYTICS_ID" == "__google_analytics_account__" ]]; then
+    # Remove the line
+    sed -i.bak /__google_analytics_account__/d hackpad/etherpad/etc/etherpad.local.properties
+else
+    sed -i.bak s/__google_analytics_account__/$GOOGLE_ANALYTICS_ID/g hackpad/etherpad/etc/etherpad.local.properties
+fi
+
+if [[ "$PRO_ONLY" == "__pro_only__" ]]; then
+    # Remove the line
+    sed -i.bak /__pro_only__/d hackpad/etherpad/etc/etherpad.local.properties
+else
+    sed -i.bak s/__pro_only__/$PRO_ONLY/g hackpad/etherpad/etc/etherpad.local.properties
+fi
+
 
 exec hackpad/bin/run.sh

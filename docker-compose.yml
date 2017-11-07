@@ -1,0 +1,47 @@
+version: '3'
+services:
+  hackpad:
+    build: .
+    ports:
+      - "9000:9000"
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - USE_HTTPS_URLS=true
+      - ENABLE_FB_LOGIN=false
+      - ENABLE_GOOGLE_LOGIN=false
+      - DISABLE_DROPBOX_SYNC=true
+      - VERBOSE=false
+      - IS_PRODUCTION=true
+      - PRO_ONLY
+      - GOOGLE_ANALYTICS_ID
+      - MIXPANEL_TOKEN
+      - TOP_DOMAINS
+      - SMTP_SERVER
+      - SMTP_USER
+      - SMTP_PASS
+      - PERSONALIZE_FOOTER
+      - ADMIN_EMAILS
+      - CUSTOM_EMAIL_ADDRESS
+      - SUPPORT_EMAIL_ADDRESS
+      - DISABLE_WORKSPACE_CREATION
+      - CANONICAL_DOMAIN
+      - REDIRECT_HOME_TO
+    volumes:
+      - hackpad:/home/hackpad/hackpad/etherpad/data
+    restart: unless-stopped
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: "hackpad"
+      MYSQL_USER: "hackpad"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - db:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  db:
+  hackpad:

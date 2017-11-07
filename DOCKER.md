@@ -3,25 +3,19 @@ How to develop Hackpad under Docker
 
 If you'd like to develop Hackpad on Docker, these instructions are for you.
 
-This will let you edit this repository and see your changes reflected in the docker image. 
+This will let you edit this repository and see your changes reflected in the docker image.
 
 Getting it running
 -------------------
 
 1. Obviously, if you haven't already, you'll need to install [Docker](https://docs.docker.com/installation/).
 
-2. Build the image. From the root of this repo, run:
+2. Build the image, pull in dependencies and run the container:
 
-		docker build -t hackpad .
+        docker-compose up
 
-3. Run the container. Docker doesn't let you automatically mount a directory on your host machine in the container, so you'll need to specify by hand. 
+   The available environment variables are:
 
-	Replace /path/to/this/repo below with the path to the current repository. Leave the other path alone. 
-
-		docker run -d -p 9000:9000 -v /path/to/this/repo:/etc/hackpad/src hackpad
-		
-	The available environment variables are:
-	
         ADMIN_EMAILS - comma-separated superuser emails (default: admin@example.com)
         DB_HOST - mysql host (default: mysql)
         DB_REQUIRE_SSL - Defaults to false
@@ -70,39 +64,18 @@ Getting it running
         REQUEST_SIGNIN_SECRET - Request signin secret key
         REDIRECT_HOME_TO - Change the home page by adding a valid absolute path in this variable
         S3_BUCKET_AVATARS_FOLDER - If you want to store avatars in a folder, add it here (with the / included)
-        AWS_DOMAIN - The domain of your S3 bucket 
-        
-        
-        Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker run' command, e.x. "-e DB_HOST=localhost -e DB_PORT=3306" etc. 
+        AWS_DOMAIN - The domain of your S3 bucket
+        VERBOSE - Verbosity
+        PRO_ONLY - Whether 'main'/primary domain Hackpad exists or only subdomains/workspaces.
 
-	This will build hackpad, run schema migrations, and then start the server. It may take a few minutes. If you want to see what's going on, do:
 
-		docker logs -f [container name]
+        Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker-compose run hackpad' command, e.x. "docker-compose run -e DB_HOST=localhost -e DB_PORT=3306 hackpad" etc.
 
-4. Fix networking (one time only). If you're on OS X or Windows, you'll need to set up port forwarding to have Hackpad work properly. Linux folk can skip this.
+3. Create a password for the admin account.
 
-	1. Open VirtualBox
+	As part of the Docker setup, Hackpad is configured with 'admin@localhost.info' as a admin account, but you'll need to create a password to log in.
 
-	2. Select the `default` image and click Settings
-
-	3. Go to Network -> Adapter 1 -> Port forwarding
-
-	4. Create a custom rule like so:
-
-		* Host IP: 127.0.0.1
-		* Host Port: 9000
-		* Guest IP: blank
-		* Guest Port: 9000
-
-	You should only have to do this once.
-
-	At this point you should be able to open http://localhost:9000 in a browser and see the Hackpad page.
-
-5. Create a password for the admin account.
-
-	As part of the Docker setup, Hackpad is configured with 'admin@localhost.info' as a admin account, but you'll need to create a password to log in. 
-
-	To do that: 
+	To do that:
 
 	1. Open http://localhost:9000 and click Log In
 
@@ -110,7 +83,7 @@ Getting it running
 
 	3. From the command line, run:
 
-		1. Find the name of your running container by running `docker ps`. Note the name. 
+		1. Find the name of your running container by running `docker ps`. Note the name.
 
 		2. Run this query and find the token:
 
