@@ -20,17 +20,17 @@ RUN wget https://cdn.mysql.com/archives/mysql-connector-java-5.1/mysql-connector
     rm -rf mysql-connector-java-5.1.34/
 
 # Copy and build infrastructure
-COPY bin hackpad/bin
 COPY infrastructure hackpad/infrastructure
-COPY exports.sh hackpad/bin/exports.sh
+COPY bin/build.sh exports.sh hackpad/bin/
 
 RUN ./hackpad/bin/build.sh
 
-# Copy etherpad JS and star script
+# Copy start and run scripts
+COPY bin/start.sh bin/run.sh hackpad/bin/
+
+# Copy etherpad JS
 COPY etherpad ./hackpad/etherpad
-COPY start.sh start.sh
-RUN chmod +x start.sh
 
 EXPOSE 9000
 
-CMD '/home/hackpad/start.sh'
+CMD '/home/hackpad/hackpad/bin/start.sh'
