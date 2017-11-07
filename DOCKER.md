@@ -66,6 +66,7 @@ Getting it running
         S3_BUCKET_AVATARS_FOLDER - If you want to store avatars in a folder, add it here (with the / included)
         AWS_DOMAIN - The domain of your S3 bucket
         VERBOSE - Verbosity
+        PRO_ONLY - Whether 'main'/primary domain Hackpad exists or only subdomains/workspaces.
 
 
         Note: For EACH environment variable you want to set, add "-e ENV_VAR=VALUE" at the 'docker-compose run hackpad' command, e.x. "docker-compose run -e DB_HOST=localhost -e DB_PORT=3306 hackpad" etc.

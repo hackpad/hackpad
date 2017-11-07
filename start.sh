@@ -136,4 +136,12 @@ else
     sed -i.bak s/__google_analytics_account__/$GOOGLE_ANALYTICS_ID/g hackpad/etherpad/etc/etherpad.local.properties
 fi
 
+if [[ "$PRO_ONLY" == "__pro_only__" ]]; then
+    # Remove the line
+    sed -i.bak /__pro_only__/d hackpad/etherpad/etc/etherpad.local.properties
+else
+    sed -i.bak s/__pro_only__/$PRO_ONLY/g hackpad/etherpad/etc/etherpad.local.properties
+fi
+
+
 exec hackpad/bin/run.sh
